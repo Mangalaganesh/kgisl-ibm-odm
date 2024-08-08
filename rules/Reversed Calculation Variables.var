@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>Reversed Calculation Variables</name>
+  <uuid>1bc0c280-d7e4-484f-ad9d-e6bfc9c7bd95</uuid>
+  <documentation><![CDATA[]]></documentation>
+  <variables name="ReversePremiumBeforeVatOutput" type="double" initialValue="" verbalization="ReversePremiumBeforeVatOutput"/>
+  <variables name="ReverseBeforeNcb" type="double" initialValue="" verbalization="ReverseBeforeNcb"/>
+  <variables name="ReverseBeforeDirectDisc" type="double" initialValue="" verbalization="ReverseBeforeDirectDisc"/>
+  <variables name="ReverseBeforeRedPlate" type="double" initialValue="" verbalization="ReverseBeforeRedPlate"/>
+  <variables name="ReverseBeforeBailBond" type="double" initialValue="" verbalization="ReverseBeforeBailBond"/>
+  <variables name="ReverseVatAmountOutput" type="double" initialValue="" verbalization="ReverseVatAmountOutput"/>
+  <variables name="ReverseUsageOutput" type="double" initialValue="" verbalization="ReverseUsageOutput"/>
+  <variables name="ReversePaSumAmountOutput" type="double" initialValue="" verbalization="ReversePaSumAmountOutput"/>
+  <variables name="ReversePaBailBondOutput" type="double" initialValue="" verbalization="ReversePaBailBondOutput"/>
+  <variables name="ReversePaMedicalExpenseOutput" type="double" initialValue="" verbalization="ReversePaMedicalExpenseOutput"/>
+  <variables name="ReversePaPassengerAmountOutput" type="double" initialValue="" verbalization="ReversePaPassengerAmountOutput"/>
+  <variables name="ReverseBeforeMedicalExp" type="double" initialValue="" verbalization="ReverseBeforeMedicalExp"/>
+  <variables name="ReverseBeforeCctvDiscount" type="double" initialValue="" verbalization="ReverseBeforeCctvDiscount"/>
+  <variables name="ReverseBeforePaAmount" type="double" initialValue="" verbalization="ReverseBeforePaAmount"/>
+  <variables name="ReverseBeforeDriverAmount" type="double" initialValue="" verbalization="ReverseBeforeDriverAmount"/>
+  <variables name="ReverseBeforePasengerAmount" type="double" initialValue="" verbalization="ReverseBeforePasengerAmount"/>
+  <variables name="ReversePaDriverAmountOutput" type="double" initialValue="" verbalization="ReversePaDriverAmountOutput"/>
+  <variables name="ReverseTPBiAccidentOutput" type="double" initialValue="" verbalization="ReverseTPBiAccidentOutput"/>
+  <variables name="ReverseStampDutyOutput" type="double" initialValue="" verbalization="ReverseStampDutyOutput"/>
+  <variables name="ReverseTPBiPersonOutput" type="double" initialValue="" verbalization="ReverseTPBiPersonOutput"/>
+  <variables name="ReverseCarGroupOutput" type="double" initialValue="" verbalization="ReverseCarGroupOutput"/>
+  <variables name="ReverseSumInsuredOutput" type="double" initialValue="" verbalization="ReverseSumInsuredOutput"/>
+  <variables name="ReverseDriverAgeOutput" type="double" initialValue="" verbalization="ReverseDriverAgeOutput"/>
+  <variables name="ReverseCapacityOutput" type="double" initialValue="" verbalization="ReverseCapacityOutput"/>
+  <variables name="ReverseBeforeDeductible" type="double" initialValue="" verbalization="ReverseBeforeDeductible"/>
+  <variables name="ReverseBeforeFleet" type="double" initialValue="" verbalization="ReverseBeforeFleet"/>
+  <variables name="ReverseTPPropertyResult" type="double" initialValue="" verbalization="ReverseTPPropertyResult"/>
+  <variables name="ReverseBaseRateResult" type="double" initialValue="" verbalization="ReverseBaseRateResult"/>
+  <variables name="ReverseGrossPremiumOutput" type="double" initialValue="" verbalization="ReverseGrossPremiumOutput"/>
+  <variables name="ReverseAnnualPremiumOutput" type="double" initialValue="" verbalization="ReverseAnnualPremiumOutput"/>
+  <variables name="ReverseCctvDiscountOutput" type="double" initialValue="" verbalization="ReverseCctvDiscountOutput"/>
+  <variables name="ReverseRedPlateDiscountOutput" type="double" initialValue="" verbalization="ReverseRedPlateDiscountOutput"/>
+  <variables name="ReverseDirectDiscountOutput" type="double" initialValue="" verbalization="ReverseDirectDiscountOutput"/>
+  <variables name="ReverseNcbDiscountOutput" type="double" initialValue="" verbalization="ReverseNcbDiscountOutput"/>
+  <variables name="ReverseFleetDiscountOutput" type="double" initialValue="" verbalization="ReverseFleetDiscountOutput"/>
+  <variables name="ReverseCarAgeOutput" type="double" initialValue="" verbalization="ReverseCarAgeOutput"/>
+  <variables name="ReverseTotalPremiumOutput" type="double" initialValue="" verbalization="ReverseTotalPremiumOutput"/>
+  <variables name="ReverseNCBRenewalResult" type="double" initialValue="" verbalization="ReverseNCBRenewalResult"/>
+  <variables name="calculationType" type="java.lang.String" initialValue="&quot;F&quot;" verbalization="calculationType"/>
+</ilog.rules.studio.model.base:VariableSet>

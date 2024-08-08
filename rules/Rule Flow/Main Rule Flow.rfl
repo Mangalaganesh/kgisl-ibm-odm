@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.ruleflow:RuleFlow xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.ruleflow="http://ilog.rules.studio/model/ruleflow.ecore">
+  <name>Main Rule Flow</name>
+  <uuid>f96ff1ab-b403-4182-bf17-4390b7569501</uuid>
+  <locale>en_US</locale>
+  <categories>any</categories>
+  <rfModel>
+<Ruleflow xmlns="http://schemas.ilog.com/Rules/7.0/Ruleflow">
+  <Body>
+    <TaskList>
+      <StartTask Identifier="task_1"/>
+      <SubflowTask Identifier="Reversed Flow" Uuid="b821a1f7-93bd-453c-9bbe-a42788a245f4">
+        <InitialActions Language="irl"><![CDATA[policyPoc = UtilDate.differenceBetweenTwoDates(EffectiveDate,ExpiryDate);]]></InitialActions>
+        <FinalActions Language="bal"><![CDATA[set tempTotalPremiumBeforTaxResult to TotalPremiumBeforTaxResult ;]]></FinalActions>
+      </SubflowTask>
+      <SubflowTask Identifier="Forward Flow" Uuid="c6fddc11-a3dd-4495-94f9-452f80d3f5f4">
+        <InitialActions Language="irl"><![CDATA[ReverseIncrementor = ReverseIncrementor;]]></InitialActions>
+        <FinalActions Language="irl"><![CDATA[ReverseIncrementor = ReverseIncrementor +1;]]></FinalActions>
+      </SubflowTask>
+      <ActionTask Identifier="ReverseCalc">
+        <Actions Language="bal"><![CDATA[set ReverseTotalPremiumOutput to rounding utils.roundToDecimalPlaces ( TotalPremiumResult , 2 ) ;
+    set ReverseVatAmountOutput to rounding utils.roundToDecimalPlaces ( ( ReverseTotalPremiumOutput / ( 100 + Vat ) * Vat ) , 2 ) ;
+    set ReversePremiumBeforeVatOutput to ReverseTotalPremiumOutput - ReverseVatAmountOutput ;
+    set ReverseStampDutyOutput to rounding utils.roundToDecimalPlaces ( ( (ReversePremiumBeforeVatOutput /  100 + StampDuty ) * StampDuty ) , 2 ) ;
+    set ReverseGrossPremiumOutput to ReversePremiumBeforeVatOutput - ReverseStampDutyOutput ;
+    set ReverseAnnualPremiumOutput to ReverseGrossPremiumOutput ;
+    set ReverseCctvDiscountOutput to ReverseAnnualPremiumOutput ;
+    set ReverseBeforeCctvDiscount to rounding utils.roundToDecimalPlaces ( ( ReverseCctvDiscountOutput + ReverseCctvDiscountOutput / ( 100 - 0 ) * 0 ) , 2 ) ;
+    set ReverseRedPlateDiscountOutput to rounding utils.roundToDecimalPlaces ( ( ReverseBeforeCctvDiscount / ( 100 - 0 ) * 0 ) , 2 ) ;
+    set ReverseBeforeRedPlate to rounding utils.roundToDecimalPlaces ( ( ReverseBeforeCctvDiscount + ReverseRedPlateDiscountOutput ) , 2 ) ;
+    set ReverseDirectDiscountOutput to rounding utils.roundToDecimalPlaces ( ( ReverseBeforeRedPlate / ( 100 - 0 ) * 0 ) , 2 ) ;
+    set ReverseBeforeDirectDisc to rounding utils.roundToDecimalPlaces ( ReverseBeforeRedPlate + ReverseDirectDiscountOutput , 2 ) ;
+    set ReverseNcbDiscountOutput to LargestNumber ;
+    set ReverseBeforeNcb to rounding utils.roundToDecimalPlaces ( ReverseBeforeDirectDisc + ReverseNcbDiscountOutput , 2 ) ;
+    set ReverseFleetDiscountOutput to rounding utils.roundToDecimalPlaces ( ( ReverseBeforeNcb / ( 100 - 0 ) * 0 ) , 2 ) ;
+    set ReverseBeforeFleet to rounding utils.roundToDecimalPlaces ( ( ReverseBeforeNcb + ReverseFleetDiscountOutput ) , 2 ) ;
+    set ReverseBeforeDeductible to ReverseBeforeFleet + DeductibleResult ;
+    set ReversePaDriverAmountOutput to rounding utils.roundToDecimalPlaces ( DriverPassengerSiResult * ( DriverCoverResult / 100 ) , 2 ) ;
+    set ReversePaPassengerAmountOutput to rounding utils.roundToDecimalPlaces ( DriverPassengerSiResult * ( PassengerCoverResult / 100 ) * ( the seats of TariffInput - 1 ) , 2 ) ;
+    set ReversePaMedicalExpenseOutput to rounding utils.roundToDecimalPlaces ( MedicalExpenseResult * the seats of TariffInput , 2 ) ;
+    set ReversePaBailBondOutput to rounding utils.roundToDecimalPlaces ( ( BailBondSiResult * ( BailBondResult / 100 ) ) , 2 ) ;
+    set ReverseBeforeBailBond to rounding utils.roundToDecimalPlaces ( ReverseBeforeDeductible , 2 ) ;
+    set ReverseBeforeMedicalExp to rounding utils.roundToDecimalPlaces ( ReverseBeforeBailBond - ReversePaBailBondOutput , 2 ) ;
+    set ReverseBeforePasengerAmount to rounding utils.roundToDecimalPlaces ( ReverseBeforeMedicalExp - ReversePaMedicalExpenseOutput , 2 ) ;
+    set ReverseBeforeDriverAmount to rounding utils.roundToDecimalPlaces ( ReverseBeforePasengerAmount - ReversePaPassengerAmountOutput , 2 ) ;
+    set ReversePaSumAmountOutput to ReversePaDriverAmountOutput + ReversePaPassengerAmountOutput + ReversePaMedicalExpenseOutput + ReversePaBailBondOutput ;
+    set ReverseBeforePaAmount to rounding utils.roundToDecimalPlaces ( ReverseBeforeDeductible - ReversePaSumAmountOutput , 2 ) ;
+    set ReverseTPPropertyResult to rounding utils.roundToDecimalPlaces ( ReverseBeforeDriverAmount - ReversePaDriverAmountOutput , 2 ) ;
+    set ReverseTPBiAccidentOutput to rounding utils.roundToDecimalPlaces ( ReverseTPPropertyResult / TPPropertyResult , 2 ) ;
+    set ReverseTPBiPersonOutput to rounding utils.roundToDecimalPlaces ( ReverseTPBiAccidentOutput / BIAccidentResult , 2 ) ;
+    set ReverseCarGroupOutput to rounding utils.roundToDecimalPlaces ( ReverseTPBiPersonOutput / TPBIPersonResult , 2 ) ;
+    set ReverseSumInsuredOutput to rounding utils.roundToDecimalPlaces ( ReverseCarGroupOutput / ( CarGroupResult / 100 ) , 2 ) ;
+    set ReverseCarAgeOutput to rounding utils.roundToDecimalPlaces ( ReverseSumInsuredOutput / ( SumInsuredResult / 100 ) , 2 ) ;
+    set ReverseDriverAgeOutput to rounding utils.roundToDecimalPlaces ( ReverseCarAgeOutput / ( CarAgeResult / 100 ) , 2 ) ;
+    set ReverseCapacityOutput to rounding utils.roundToDecimalPlaces ( ReverseDriverAgeOutput / ( DriverAgeResult / 100 ) , 2 ) ;
+    set ReverseUsageOutput to rounding utils.roundToDecimalPlaces ( ReverseCapacityOutput / ( CapacityResult / 100 ) , 2 ) ;
+    set ReverseBaseRateResult to rounding utils.roundToDecimalPlaces ( ReverseUsageOutput / ( UsageResult / 100 ) , 2 ) ;]]></Actions>
+      </ActionTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_0" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="16805b70-edc7-4247-ba97-ef7e39523dd6"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_1" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="62774caa-0bcd-437c-b9d6-e180e39158a2"/>
+          <Rule Uuid="093dfd65-0549-477e-8854-f0d31b6229cc"/>
+        </RuleList>
+      </RuleTask>
+      <ActionTask Identifier="function_1">
+        <Actions Language="bal"><![CDATA[set TotalPremiumResult to TotalPremiumResult - TotalPremiumResult * (ClaimDiscount / 100);]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_2">
+        <Actions Language="bal"><![CDATA[set TotalPremiumResult to TotalPremiumResult + TotalPremiumResult * (ClaimLoading / 100);]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_3">
+        <Actions Language="bal"><![CDATA[set RenewalSumInsured to the sum insured of TariffInput - ( the sum insured of TariffInput * 10 / 100 ) ;
+set the sum insured of TariffInput to the sum insured of TariffInput - ( the sum insured of TariffInput * 10 / 100 ) ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_7">
+        <Actions Language="bal"><![CDATA[set LargestNumber to list util.largestNumber ( NCBRenewalResult );]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_4">
+        <Actions Language="bal"><![CDATA[set LargestNumber to 0;]]></Actions>
+      </ActionTask>
+      <SubflowTask Identifier="task_0" Uuid="22753407-b39e-49f8-bb49-605ef75208a6"/>
+      <ActionTask Identifier="task_3">
+        <Actions Language="bal"><![CDATA[set commissionPct to (commissionPct + addlnCommissionPct );
+set commissionAmount to utils.roundMax( (TotalPremiumBeforTaxResult * commissionPct/100));]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_5">
+        <Actions Language="bal"><![CDATA[set commissionAmount to commissionFlatAmt ;]]></Actions>
+      </ActionTask>
+      <StopTask Identifier="task_2"/>
+    </TaskList>
+    <NodeList>
+      <TaskNode Identifier="node_0" Task="task_1"/>
+      <TaskNode Identifier="node_1" Task="task_2"/>
+      <TaskNode Identifier="node_2" Task="Reversed Flow"/>
+      <TaskNode Identifier="node_3" Task="Forward Flow"/>
+      <BranchNode Identifier="node_4"/>
+      <TaskNode Identifier="node_5" Task="ReverseCalc"/>
+      <TaskNode Identifier="node_6" Task="rule_0"/>
+      <TaskNode Identifier="node_7" Task="rule_1"/>
+      <TaskNode Identifier="node_8" Task="function_1"/>
+      <TaskNode Identifier="node_9" Task="function_2"/>
+      <TaskNode Identifier="node_10" Task="function_3"/>
+      <BranchNode Identifier="node_14"/>
+      <TaskNode Identifier="node_15" Task="function_7"/>
+      <TaskNode Identifier="node_11" Task="function_4"/>
+      <TaskNode Identifier="node_12" Task="task_0"/>
+      <BranchNode Identifier="node_13"/>
+      <TaskNode Identifier="node_16" Task="task_3"/>
+      <BranchNode Identifier="node_17"/>
+      <TaskNode Identifier="node_18" Task="function_5"/>
+    </NodeList>
+    <TransitionList>
+      <Transition Identifier="transition_3" Source="node_4" Target="node_3">
+        <Conditions Language="irl"><![CDATA[ReverseIncrementor <= 7]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_4" Source="node_3" Target="node_4"/>
+      <Transition Identifier="transition_8" Source="node_2" Target="node_6">
+        <Conditions Language="bal"><![CDATA[TotalPremiumResult equals 0]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_9" Source="node_6" Target="node_3"/>
+      <Transition Identifier="transition_10" Source="node_7" Target="node_4"/>
+      <Transition Identifier="transition_11" Source="node_2" Target="node_9">
+        <Conditions Language="bal"><![CDATA[the transaction type of TariffInput is RENEWAL
+and the claim ratio of TariffInput is more than 0]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_7" Source="node_2" Target="node_8">
+        <Conditions Language="bal"><![CDATA[the transaction type of TariffInput is RENEWAL
+and the claim ratio of TariffInput equals 0]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_14" Source="node_0" Target="node_10">
+        <Conditions Language="bal"><![CDATA[the transaction type of TariffInput is RENEWAL]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_15" Source="node_10" Target="node_2"/>
+      <Transition Identifier="transition_0" Source="node_0" Target="node_13"/>
+      <Transition Identifier="transition_13" Source="node_2" Target="node_14"/>
+      <Transition Identifier="transition_2" Source="node_8" Target="node_14"/>
+      <Transition Identifier="transition_12" Source="node_9" Target="node_14"/>
+      <Transition Identifier="transition_16" Source="node_14" Target="node_15">
+        <Conditions Language="bal"><![CDATA[the transaction type of TariffInput is RENEWAL
+and the claim ratio of TariffInput equals 0]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_18" Source="node_14" Target="node_11"/>
+      <Transition Identifier="transition_20" Source="node_11" Target="node_5"/>
+      <Transition Identifier="transition_21" Source="node_15" Target="node_5"/>
+      <Transition Identifier="transition_1" Source="node_5" Target="node_7"/>
+      <Transition Identifier="transition_17" Source="node_12" Target="node_2"/>
+      <Transition Identifier="transition_19" Source="node_13" Target="node_12">
+        <Conditions Language="bal"><![CDATA[planCode is "MPC_CM"]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_22" Source="node_13" Target="node_2"/>
+      <Transition Identifier="transition_23" Source="node_16" Target="node_1"/>
+      <Transition Identifier="transition_24" Source="node_4" Target="node_17"/>
+      <Transition Identifier="transition_25" Source="node_17" Target="node_16">
+        <Conditions Language="bal"><![CDATA[commissionCalcType is "RATE"]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_6" Source="node_17" Target="node_18">
+        <Conditions Language="bal"><![CDATA[commissionCalcType is "FLAT"]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_27" Source="node_18" Target="node_1"/>
+      <Transition Identifier="transition_26" Source="node_3" Target="node_17">
+        <Conditions Language="bal"><![CDATA[ReverseTotalPremiumOutput equals 0]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_28" Source="node_17" Target="node_1"/>
+    </TransitionList>
+  </Body>
+  <Resources>
+    <ResourceSet Locale="en_US">
+      <Data Name="node_14#name">node_14</Data>
+      <Data Name="transition_8#label">New Business</Data>
+      <Data Name="node_7#y">797.262</Data>
+      <Data Name="node_9#x">263.6187</Data>
+      <Data Name="node_17#label">Condition</Data>
+      <Data Name="node_9#y">462.26202</Data>
+      <Data Name="node_2#name">node_2</Data>
+      <Data Name="node_10#label">Action Task</Data>
+      <Data Name="node_5#height">53.402344</Data>
+      <Data Name="node_6#label">Base Rate Table</Data>
+      <Data Name="node_14#label">Condition</Data>
+      <Data Name="node_12#height">53.402344</Data>
+      <Data Name="node_12#width">106.01953</Data>
+      <Data Name="node_12#y">272.26202</Data>
+      <Data Name="node_14#x">99.06824</Data>
+      <Data Name="node_14#y">557.262</Data>
+      <Data Name="node_16#x">268.85834</Data>
+      <Data Name="node_10#x">394.7658</Data>
+      <Data Name="node_10#y">272.26202</Data>
+      <Data Name="node_12#x">201.84523</Data>
+      <Data Name="node_3#y">797.262</Data>
+      <Data Name="node_5#x">53.427258</Data>
+      <Data Name="node_5#y">717.262</Data>
+      <Data Name="node_7#x">38.934967</Data>
+      <Data Name="node_16#y">972.262</Data>
+      <Data Name="node_1#x">317.12244</Data>
+      <Data Name="node_8#name">node_8</Data>
+      <Data Name="node_18#x">77.44439</Data>
+      <Data Name="node_1#y">1067.262</Data>
+      <Data Name="node_18#y">972.262</Data>
+      <Data Name="node_3#x">255.82129</Data>
+      <Data Name="node_1#name">node_1</Data>
+      <Data Name="node_2#label">Find Premium Flow</Data>
+      <Data Name="node_5#label">Reverse Calculation</Data>
+      <Data Name="transition_7#label">Renewal and Claim Ratio equals 0</Data>
+      <Data Name="node_4#name">node_4</Data>
+      <Data Name="node_15#name">node_15</Data>
+      <Data Name="node_7#name">node_7</Data>
+      <Data Name="node_12#name">node_12</Data>
+      <Data Name="node_9#label">Claim Loading</Data>
+      <Data Name="node_16#label">Calc Commission </Data>
+      <Data Name="node_17#name">node_17</Data>
+      <Data Name="node_8#x">81.59564</Data>
+      <Data Name="node_8#y">462.26202</Data>
+      <Data Name="node_5#name">node_5</Data>
+      <Data Name="transition_3#label">Loop</Data>
+      <Data Name="transition_25#label">Commission Percentage</Data>
+      <Data Name="transition_6#label">Flat Commission Amount</Data>
+      <Data Name="node_13#x">208.07538</Data>
+      <Data Name="node_13#y">192.26202</Data>
+      <Data Name="node_15#x">-120.63182</Data>
+      <Data Name="node_15#y">637.262</Data>
+      <Data Name="node_18#name">node_18</Data>
+      <Data Name="node_11#x">157.10085</Data>
+      <Data Name="node_15#label">Renewal - Set Largest Number</Data>
+      <Data Name="node_11#y">637.262</Data>
+      <Data Name="node_4#x">223.8488</Data>
+      <Data Name="node_8#label">Claim Discount</Data>
+      <Data Name="node_4#y">892.262</Data>
+      <Data Name="node_6#x">366.70312</Data>
+      <Data Name="transition_16#label">Transaction Type Renewal and Claim Ratio equals 0</Data>
+      <Data Name="node_5#width">102.0</Data>
+      <Data Name="node_6#y">637.262</Data>
+      <Data Name="node_0#x">330.9206</Data>
+      <Data Name="node_11#name">node_11</Data>
+      <Data Name="node_17#x">307.84882</Data>
+      <Data Name="node_0#y">122.262024</Data>
+      <Data Name="node_12#label">calc Compulsory</Data>
+      <Data Name="node_17#y">892.262</Data>
+      <Data Name="node_2#x">160.64426</Data>
+      <Data Name="node_2#y">367.26202</Data>
+      <Data Name="transition_11#label">Renewal and Claim Ratio More than 0</Data>
+      <Data Name="node_11#label">Largest Number to 0</Data>
+      <Data Name="node_18#label">Flat Commission</Data>
+      <Data Name="node_7#label">Base Premium Table</Data>
+      <Data Name="node_10#name">node_10</Data>
+      <Data Name="node_6#name">node_6</Data>
+      <Data Name="node_9#name">node_9</Data>
+      <Data Name="node_0#name">node_0</Data>
+      <Data Name="node_4#label">Branch</Data>
+      <Data Name="transition_14#label">Renewal</Data>
+      <Data Name="node_13#name">node_13</Data>
+      <Data Name="node_16#name">node_16</Data>
+      <Data Name="node_3#name">node_3</Data>
+    </ResourceSet>
+  </Resources>
+  <Properties>
+    <imports><![CDATA[use ReverseIncrementor;
+use policyPoc;
+import main.tariffcalculation.UtilDate;
+use EffectiveDate;
+use ExpiryDate;
+]]></imports>
+  </Properties>
+</Ruleflow>
+</rfModel>
+</ilog.rules.studio.model.ruleflow:RuleFlow>

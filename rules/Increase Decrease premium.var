@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>Increase Decrease premium</name>
+  <uuid>98f56970-4213-4469-97c8-82d8026b5ea8</uuid>
+  <documentation><![CDATA[]]></documentation>
+  <variables name="lossRatio" type="double" initialValue="" verbalization="lossRatio"/>
+  <variables name="premiumPct" type="double" initialValue="" verbalization="premiumPct"/>
+  <variables name="noOfClaims" type="double" initialValue="" verbalization="noOfClaims"/>
+</ilog.rules.studio.model.base:VariableSet>

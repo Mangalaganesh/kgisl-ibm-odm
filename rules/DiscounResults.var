@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>DiscounResults</name>
+  <uuid>22809335-47fc-49e2-8b0d-d6e42c24bda8</uuid>
+  <variables name="FleetPercentResult" type="double" initialValue="" verbalization="FleetPercentResult"/>
+  <variables name="NCBDiscountResult" type="double" initialValue="" verbalization="NCBDiscountResult"/>
+  <variables name="DirectDiscountResult" type="double" initialValue="" verbalization="DirectDiscountResult"/>
+  <variables name="RedPlateDiscountResult" type="double" initialValue="" verbalization="RedPlateDiscountResult"/>
+  <variables name="CCTVDiscountRangeResult" type="double" initialValue="" verbalization="CCTVDiscountRangeResult"/>
+</ilog.rules.studio.model.base:VariableSet>

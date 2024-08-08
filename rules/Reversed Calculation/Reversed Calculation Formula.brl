@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.brl:ActionRule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.brl="http://ilog.rules.studio/model/brl.ecore">
+  <name>Reversed Calculation Formula</name>
+  <uuid>788595a0-ecee-45fc-8b53-4af47390d362</uuid>
+  <active>false</active>
+  <locale>en_US</locale>
+  <definition><![CDATA[then
+    set ReverseTotalPremiumOutput to TotalPremiumResult ;
+    set ReverseVatAmountOutput to rounding utils.roundToDecimalPlaces ( ( ReverseTotalPremiumOutput / ( ( 100 + Vat ) * Vat ) ) , 2 ) ;
+    set ReversePremiumBeforeVatOutput to ReverseTotalPremiumOutput - ReverseVatAmountOutput ;
+    set ReverseStampDutyOutput to rounding utils.roundToDecimalPlaces ( ( ReversePremiumBeforeVatOutput / ( ( 100 + StampDuty ) * StampDuty ) ) , 2 ) ;
+    set ReverseGrossPremiumOutput to ReversePremiumBeforeVatOutput - ReverseStampDutyOutput ;
+    set ReverseAnnualPremiumOutput to ReverseGrossPremiumOutput ;
+    set ReverseCctvDiscountOutput to ReverseAnnualPremiumOutput ;
+    set ReverseBeforeCctvDiscount to rounding utils.roundToDecimalPlaces ( ( ReverseCctvDiscountOutput + ( ReverseCctvDiscountOutput / ( ( 100 - 0 ) ) * 0 ) ) , 2 ) ;
+    set ReverseRedPlateDiscountOutput to rounding utils.roundToDecimalPlaces ( ( ReverseBeforeCctvDiscount / ( 100 - 0 ) * 0 ) , 2 ) ;
+    set ReverseBeforeRedPlate to rounding utils.roundToDecimalPlaces ( ( ReverseBeforeCctvDiscount + ReverseRedPlateDiscountOutput ) , 2 ) ;
+    set ReverseDirectDiscountOutput to rounding utils.roundToDecimalPlaces ( ( ReverseBeforeRedPlate / ( 100 - 0 ) * 0 ) , 2 ) ;
+    set ReverseBeforeDirectDisc to rounding utils.roundToDecimalPlaces ( ReverseBeforeRedPlate + ReverseDirectDiscountOutput , 2 ) ;
+    set ReverseNcbDiscountOutput to rounding utils.roundToDecimalPlaces ( ( ReverseBeforeDirectDisc / ( 100 - ClaimDiscount ) * 0 ) , 2 ) ;
+    set ReverseBeforeNcb to rounding utils.roundToDecimalPlaces ( ReverseBeforeDirectDisc + ReverseNcbDiscountOutput , 2 ) ;
+    set ReverseFleetDiscountOutput to rounding utils.roundToDecimalPlaces ( ( ReverseBeforeNcb / ( 100 - 0 ) * 0 ) , 2 ) ;
+    set ReverseBeforeFleet to rounding utils.roundToDecimalPlaces ( ( ReverseBeforeNcb + ReverseFleetDiscountOutput ) , 2 ) ;
+    set ReverseBeforeDeductible to ReverseBeforeFleet + DeductibleResult ;
+    set ReversePaDriverAmountOutput to rounding utils.roundToDecimalPlaces ( DriverPassengerSiResult * ( DriverCoverResult / 100 ) , 2 ) ;
+    set ReversePaPassengerAmountOutput to rounding utils.roundToDecimalPlaces ( ( DriverPassengerSiResult * ( PassengerCoverResult / 100 ) * ( the seats of TariffInput - 1 ) ) , 2 ) ;
+    set ReversePaMedicalExpenseOutput to rounding utils.roundToDecimalPlaces ( MedicalExpenseResult * the seats of TariffInput , 2 ) ;
+    set ReversePaBailBondOutput to rounding utils.roundToDecimalPlaces ( ( BailBondSiResult * ( BailBondResult / 100 ) ) , 2 ) ;
+    set ReverseBeforeBailBond to rounding utils.roundToDecimalPlaces ( ReverseBeforeDeductible , 2 ) ;
+    set ReverseBeforeMedicalExp to rounding utils.roundToDecimalPlaces ( ReverseBeforeBailBond - ReversePaBailBondOutput , 2 ) ;
+    set ReverseBeforePasengerAmount to rounding utils.roundToDecimalPlaces ( ReverseBeforeMedicalExp - ReversePaMedicalExpenseOutput , 2 ) ;
+    set ReverseBeforeDriverAmount to rounding utils.roundToDecimalPlaces ( ( ReverseBeforePasengerAmount - ReversePaPassengerAmountOutput ) , 2 ) ;
+    set ReversePaSumAmountOutput to ReversePaDriverAmountOutput + ReversePaPassengerAmountOutput + ReversePaMedicalExpenseOutput + ReversePaBailBondOutput ;
+    set ReverseBeforePaAmount to rounding utils.roundToDecimalPlaces ( ( ReverseBeforeDriverAmount - ReversePaDriverAmountOutput ) , 2 ) ;
+    set ReverseTPPropertyResult to rounding utils.roundToDecimalPlaces ( ( ReverseBeforeDriverAmount - ReversePaDriverAmountOutput ) , 2 ) ;
+    set ReverseTPBiAccidentOutput to rounding utils.roundToDecimalPlaces ( ReverseTPPropertyResult / BIAccidentResult , 2 ) ;
+    set ReverseTPBiPersonOutput to rounding utils.roundToDecimalPlaces ( ( ReverseTPBiAccidentOutput / BIAccidentResult ) , 2 ) ;
+    set ReverseCarGroupOutput to rounding utils.roundToDecimalPlaces ( ( ReverseTPBiPersonOutput / TPBIPersonResult ) , 2 ) ;
+    set ReverseSumInsuredOutput to rounding utils.roundToDecimalPlaces ( ( ReverseCarGroupOutput / ( CarGroupResult / 100 ) ) , 2 ) ;
+    set ReverseCarAgeOutput to rounding utils.roundToDecimalPlaces ( ( ReverseSumInsuredOutput / ( SumInsuredResult / 100 ) ) , 2 ) ;
+    set ReverseDriverAgeOutput to rounding utils.roundToDecimalPlaces ( ( ReverseCarAgeOutput / ( CarAgeResult / 100 ) ) , 2 ) ;
+    set ReverseCapacityOutput to rounding utils.roundToDecimalPlaces ( ( ReverseDriverAgeOutput / ( DriverAgeResult / 100 ) ) , 2 ) ;
+    set ReverseUsageOutput to rounding utils.roundToDecimalPlaces ( ( ReverseCapacityOutput / ( CapacityResult / 100 ) ) , 2 ) ;
+    set ReverseBaseRateResult to rounding utils.roundToDecimalPlaces ( ( ReverseUsageOutput / ( UsageResult / 100 ) ) , 2 ) ;]]></definition>
+</ilog.rules.studio.model.brl:ActionRule>

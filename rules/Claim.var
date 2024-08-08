@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>Claim</name>
+  <uuid>dbc6686b-8d0f-41f0-b8da-46720e3bb9d9</uuid>
+  <documentation><![CDATA[]]></documentation>
+  <variables name="ClaimLoading" type="double" initialValue="" verbalization="ClaimLoading"/>
+  <variables name="ClaimDiscount" type="double" initialValue="" verbalization="ClaimDiscount"/>
+</ilog.rules.studio.model.base:VariableSet>

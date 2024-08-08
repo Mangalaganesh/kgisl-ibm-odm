@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>Default Values Variables</name>
+  <uuid>1f07a620-a232-4f8c-b2a0-75b29d0724b9</uuid>
+  <documentation><![CDATA[]]></documentation>
+  <variables name="RenewalSumInsured" type="double" initialValue="" verbalization="RenewalSumInsured"/>
+  <variables name="ReverseIncrementor" type="double" initialValue="0" verbalization="ReverseIncrementor"/>
+  <variables name="DriverCover" type="double" initialValue="" verbalization="DriverCover"/>
+  <variables name="LargestNumber" type="double" initialValue="" verbalization="LargestNumber"/>
+  <variables name="ListUtils" type="main.tariffcalculation.ListUtil" initialValue="" verbalization="ListUtils"/>
+  <variables name="DriverAndPassengerPerc" type="main.tariffcalculation.condition.DriverAndPassengerPerc" initialValue="" verbalization="DriverAndPassengerPerc"/>
+  <variables name="Vat" type="double" initialValue="7" verbalization="Vat"/>
+  <variables name="StampDuty" type="double" initialValue="0.4" verbalization="StampDuty"/>
+  <variables name="DriverAge" type="double" initialValue="0" verbalization="DriverAge"/>
+  <variables name="Round" type="main.tariffcalculation.RoundingUtils" initialValue="" verbalization="Round"/>
+  <variables name="CapacityRate" type="double" initialValue="" verbalization="CapacityRate"/>
+  <variables name="Capacity" type="double" initialValue="" verbalization="Capacity"/>
+  <variables name="Usage" type="java.lang.String" initialValue="" verbalization="Usage"/>
+  <variables name="carAge" type="double" initialValue="" verbalization="carAge"/>
+  <variables name="carAgeRate" type="double" initialValue="" verbalization="carAgeRate"/>
+  <variables name="carUsageRate" type="double" initialValue="" verbalization="carUsageRate"/>
+  <variables name="DriverAgeRate" type="double" initialValue="" verbalization="DriverAgeRate"/>
+  <variables name="vmValueTemp" type="double" initialValue="" verbalization="vmValueTemp"/>
+  <variables name="Ror_Yor1" type="double" initialValue="0" verbalization="Ror_Yor1"/>
+  <variables name="Ror_Yor2" type="double" initialValue="0" verbalization="Ror_Yor2"/>
+  <variables name="Ror_Yor3" type="double" initialValue="0" verbalization="Ror_Yor3"/>
+  <variables name="tStampDutyOutput" type="double" initialValue="" verbalization="tStampDutyOutput"/>
+  <variables name="tVatAmountOutput" type="double" initialValue="" verbalization="tVatAmountOutput"/>
+  <variables name="tTotalPremiumOutput" type="double" initialValue="" verbalization="tTotalPremiumOutput"/>
+  <variables name="commissionPct" type="double" initialValue="" verbalization="commissionPct"/>
+  <variables name="commissionAmount" type="double" initialValue="" verbalization="commissionAmount"/>
+  <variables name="planCode" type="java.lang.String" initialValue="" verbalization="planCode"/>
+  <variables name="commissionCalcType" type="java.lang.String" initialValue="&quot;RATE&quot;" verbalization="commissionCalcType"/>
+  <variables name="addlnCommissionPct" type="double" initialValue="" verbalization="addlnCommissionPct"/>
+  <variables name="commissionFlatAmt" type="double" initialValue="" verbalization="commissionFlatAmt"/>
+  <variables name="productCode" type="java.lang.String" initialValue="&quot;PRIVATE_CAR&quot;" verbalization="productCode"/>
+  <variables name="rorscalc" type="double" initialValue="" verbalization="rorscalc"/>
+  <variables name="afterdeductionoutput" type="double" initialValue="" verbalization="afterdeductionoutput"/>
+  <variables name="tempTotalPremiumBeforTaxResult" type="double" initialValue="" verbalization="tempTotalPremiumBeforTaxResult"/>
+  <variables name="tTotalPremiumBeforTaxResult" type="double" initialValue="" verbalization="tTotalPremiumBeforTaxResult"/>
+  <variables name="Deductible" type="double" initialValue="3100" verbalization="Deductible"/>
+</ilog.rules.studio.model.base:VariableSet>

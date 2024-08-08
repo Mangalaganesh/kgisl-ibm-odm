@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>Third Level Decision Outputs</name>
+  <uuid>92588623-a972-4911-8683-2f9f69473dfe</uuid>
+  <documentation><![CDATA[]]></documentation>
+  <variables name="TPPropertyResult" type="double" initialValue="" verbalization="TPPropertyResult"/>
+  <variables name="TPBIPersonResult" type="double" initialValue="" verbalization="TPBIPersonResult"/>
+  <variables name="BIAccidentResult" type="double" initialValue="" verbalization="BIAccidentResult"/>
+  <variables name="MedicalExpenseResult" type="double" initialValue="" verbalization="MedicalExpenseResult"/>
+  <variables name="TotalPremiumResult" type="double" initialValue="" verbalization="TotalPremiumResult"/>
+  <variables name="TotalPremiumBeforTaxResult" type="double" initialValue="" verbalization="TotalPremiumBeforTaxResult"/>
+</ilog.rules.studio.model.base:VariableSet>

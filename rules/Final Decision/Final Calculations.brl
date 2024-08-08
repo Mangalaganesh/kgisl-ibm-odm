@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.brl:ActionRule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.brl="http://ilog.rules.studio/model/brl.ecore">
+  <name>Final Calculations</name>
+  <uuid>8089343f-dad9-43cc-b797-3b80271427d1</uuid>
+  <locale>en_US</locale>
+  <definition><![CDATA[if
+planCode is "MPC_CM"
+then
+ set UsageOutput to rounding utils.roundToDecimalPlaces ( ( BaseRateResult * ( UsageResult / 100 ) ) , 2 ) ;
+    set CapacityOutput to rounding utils.roundToDecimalPlaces ( ( UsageOutput * ( CapacityResult / 100 ) ) , 2 ) ;
+    set DriverAgeOutput to rounding utils.roundToDecimalPlaces ( ( CapacityOutput * ( DriverAgeResult / 100 ) ) , 2 ) ;
+    set CarAgeOutput to rounding utils.roundToDecimalPlaces ( ( DriverAgeOutput * ( CarAgeResult / 100 ) ) , 2 ) ;
+    set SumInsuredOutput to rounding utils.roundToDecimalPlaces ( ( CarAgeOutput * ( SumInsuredResult / 100 ) ) , 2 ) ;
+    set CarGroupOutput to rounding utils.roundToDecimalPlaces ( ( SumInsuredOutput * ( CarGroupResult / 100 ) ) , 2 ) ;
+    set TPBiPersonOutput to rounding utils.roundToDecimalPlaces ( ( CarGroupOutput * TPBIPersonResult ) , 2 ) ;
+    set TPBiAccidentOutput to rounding utils.roundToDecimalPlaces ( ( TPBiPersonOutput * BIAccidentResult ) , 2 ) ;
+    set TPPropAccidentOutput to rounding utils.roundToDecimalPlaces ( ( TPBiAccidentOutput * TPPropertyResult ) , 2 ) ;
+    set PaDriverAmountOutput to rounding utils.roundToDecimalPlaces ( ( DriverPassengerSiResult * ( DriverCoverResult / 100 ) ) , 2 ) ;
+    set AfterDriverAmoutOutput to rounding utils.roundToDecimalPlaces ( ( TPPropAccidentOutput + PaDriverAmountOutput ) , 2 ) ;
+    set PaPassengerAmountOutput to rounding utils.roundToDecimalPlaces ( ( DriverPassengerSiResult * ( PassengerCoverResult / 100 ) * ( the seats of TariffInput - 1 ) ) , 2 ) ;
+    set AfterPassengerAmountOutput to rounding utils.roundToDecimalPlaces ( ( AfterDriverAmoutOutput + PaPassengerAmountOutput ) , 2 ) ;
+    set PaMedicalExpenseOutput to rounding utils.roundToDecimalPlaces ( ( MedicalExpenseResult * the seats of TariffInput ) , 2 ) ;
+    set AfterMedicalExpenseOutput to rounding utils.roundToDecimalPlaces ( ( AfterPassengerAmountOutput + PaMedicalExpenseOutput ) , 2 ) ;
+    set PaBailBondOutput to rounding utils.roundToDecimalPlaces ( ( BailBondSiResult * ( BailBondResult / 100 )) , 2 ) ;
+    set AfterBailBondOutput to rounding utils.roundToDecimalPlaces ( ( AfterMedicalExpenseOutput + PaBailBondOutput ) , 2 ) ;
+    set PaSumAmountOutput to rounding utils.roundToDecimalPlaces ( ( PaDriverAmountOutput + PaPassengerAmountOutput + PaMedicalExpenseOutput + PaBailBondOutput ) , 2 ) ;
+    set AfterPaAmountOutput to rounding utils.roundToDecimalPlaces ( ( TPPropAccidentOutput + PaSumAmountOutput ) , 2 ) ;
+    set AfterDeductibleOutput to rounding utils.roundToDecimalPlaces ( ( AfterPaAmountOutput - DeductibleResult ) , 2 ) ;
+    set FleetDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterDeductibleOutput * ( FleetDiscountOutput ) ) , 2 ) ;
+    set AfterFleetDiscountOutput to AfterDeductibleOutput - FleetPercentResult ;
+    set NcbDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterFleetDiscountOutput * ( NCBDiscountResult / 100 ) ) , 2 ) ;
+    set AfterNcbDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterFleetDiscountOutput - NcbDiscountOutput ) , 2 ) ;
+    set DirectDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterNcbDiscountOutput * ( DirectDiscountResult / 100 ) ) , 2 ) ;
+    set AfterDirectDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterNcbDiscountOutput - DirectDiscountOutput ) , 2 ) ;
+    set RedPlateDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterDirectDiscountOutput * ( RedPlateDiscountResult / 100 ) ) , 2 ) ;
+    set AfterRedPlateDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterDirectDiscountOutput - RedPlateDiscountOutput ) , 2 ) ;
+    set CctvDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterRedPlateDiscountOutput * ( CCTVDiscountRangeResult / 100 ) ) , 2 ) ;
+    set AfterCctvDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterRedPlateDiscountOutput - CctvDiscountOutput ) , 2 ) ;
+    set AnnualPremiumOutput to AfterCctvDiscountOutput ;
+    set GrossPremiumOutput to AnnualPremiumOutput ;
+    set StampDutyOutput to rounding utils.roundToDecimalPlaces ( ( GrossPremiumOutput * ( StampDuty / 100 ) ) , 2 ) ;
+    set PremiumBeforeVatOutput to rounding utils.roundToDecimalPlaces ( ( GrossPremiumOutput + StampDutyOutput ) , 2 ) ;
+    set VatAmountOutput to rounding utils.roundToDecimalPlaces ( ( PremiumBeforeVatOutput * ( Vat / 100 ) ) , 2 ) ;
+else
+    set UsageOutput to rounding utils.roundToDecimalPlaces ( ( BaseRateResult * ( UsageResult / 100 ) ) , 2 ) ;
+    set CapacityOutput to rounding utils.roundToDecimalPlaces ( ( UsageOutput * ( CapacityResult / 100 ) ) , 2 ) ;
+    set DriverAgeOutput to rounding utils.roundToDecimalPlaces ( ( CapacityOutput * ( DriverAgeResult / 100 ) ) , 2 ) ;
+    set CarAgeOutput to rounding utils.roundToDecimalPlaces ( ( DriverAgeOutput * ( CarAgeResult / 100 ) ) , 2 ) ;
+    set SumInsuredOutput to rounding utils.roundToDecimalPlaces ( ( CarAgeOutput * ( SumInsuredResult / 100 ) ) , 2 ) ;
+    set CarGroupOutput to rounding utils.roundToDecimalPlaces ( ( SumInsuredOutput * ( CarGroupResult / 100 ) ) , 2 ) ;
+    set TPBiPersonOutput to rounding utils.roundToDecimalPlaces ( ( CarGroupOutput * TPBIPersonResult ) , 2 ) ;
+    set TPBiAccidentOutput to rounding utils.roundToDecimalPlaces ( ( TPBiPersonOutput * BIAccidentResult ) , 2 ) ;
+    set TPPropAccidentOutput to rounding utils.roundToDecimalPlaces ( ( TPBiAccidentOutput * TPPropertyResult ) , 2 ) ;
+    set PaDriverAmountOutput to rounding utils.roundToDecimalPlaces ( ( DriverPassengerSiResult * ( DriverCoverResult / 100 ) ) , 2 ) ;
+    set AfterDriverAmoutOutput to rounding utils.roundToDecimalPlaces ( ( TPPropAccidentOutput + PaDriverAmountOutput ) , 2 ) ;
+    set PaPassengerAmountOutput to rounding utils.roundToDecimalPlaces ( ( DriverPassengerSiResult * ( PassengerCoverResult / 100 ) * ( the seats of TariffInput - 1 ) ) , 2 ) ;
+    set AfterPassengerAmountOutput to rounding utils.roundToDecimalPlaces ( ( AfterDriverAmoutOutput + PaPassengerAmountOutput ) , 2 ) ;
+    set PaMedicalExpenseOutput to rounding utils.roundToDecimalPlaces ( ( MedicalExpenseResult * the seats of TariffInput ) , 2 ) ;
+    set AfterMedicalExpenseOutput to rounding utils.roundToDecimalPlaces ( ( AfterPassengerAmountOutput + PaMedicalExpenseOutput ) , 2 ) ;
+    set PaBailBondOutput to rounding utils.roundToDecimalPlaces ( ( BailBondSiResult * ( BailBondResult / 100 )) , 2 ) ;
+    set AfterBailBondOutput to rounding utils.roundToDecimalPlaces ( ( AfterMedicalExpenseOutput + PaBailBondOutput ) , 2 ) ;
+    set PaSumAmountOutput to rounding utils.roundToDecimalPlaces ( ( PaDriverAmountOutput + PaPassengerAmountOutput + PaMedicalExpenseOutput + PaBailBondOutput ) , 2 ) ;
+    set AfterPaAmountOutput to rounding utils.roundToDecimalPlaces ( ( TPPropAccidentOutput + PaSumAmountOutput ) , 2 ) ;
+    set AfterDeductibleOutput to rounding utils.roundToDecimalPlaces ( ( AfterPaAmountOutput - DeductibleResult ) , 2 ) ;
+    set FleetDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterDeductibleOutput * ( FleetDiscountOutput ) ) , 2 ) ;
+    set AfterFleetDiscountOutput to AfterDeductibleOutput - FleetPercentResult ;
+    set NcbDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterFleetDiscountOutput * ( NCBDiscountResult / 100 ) ) , 2 ) ;
+    set AfterNcbDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterFleetDiscountOutput - NcbDiscountOutput ) , 2 ) ;
+    set DirectDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterNcbDiscountOutput * ( DirectDiscountResult / 100 ) ) , 2 ) ;
+    set AfterDirectDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterNcbDiscountOutput - DirectDiscountOutput ) , 2 ) ;
+    set RedPlateDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterDirectDiscountOutput * ( RedPlateDiscountResult / 100 ) ) , 2 ) ;
+    set AfterRedPlateDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterDirectDiscountOutput - RedPlateDiscountOutput ) , 2 ) ;
+    set CctvDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterRedPlateDiscountOutput * ( CCTVDiscountRangeResult / 100 ) ) , 2 ) ;
+    set AfterCctvDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterRedPlateDiscountOutput - CctvDiscountOutput ) , 2 ) ;
+    set AnnualPremiumOutput to AfterCctvDiscountOutput ;
+    set GrossPremiumOutput to AnnualPremiumOutput ;
+    set StampDutyOutput to rounding utils.roundToDecimalPlaces ( ( GrossPremiumOutput * ( StampDuty / 100 ) ) , 2 ) ;
+    set PremiumBeforeVatOutput to rounding utils.roundToDecimalPlaces ( ( GrossPremiumOutput + StampDutyOutput ) , 2 ) ;
+    set VatAmountOutput to rounding utils.roundToDecimalPlaces ( ( PremiumBeforeVatOutput * ( Vat / 100 ) ) , 2 ) ;
+    set TotalPremiumOutput to rounding utils.roundToDecimalPlaces ( ( PremiumBeforeVatOutput + VatAmountOutput ) , 2 ) ;]]></definition>
+</ilog.rules.studio.model.brl:ActionRule>

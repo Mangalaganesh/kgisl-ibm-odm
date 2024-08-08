@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.dt:DecisionTable xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.dt="http://ilog.rules.studio/model/dt.ecore">
+  <name>Third Party and Pa Table</name>
+  <uuid>5e294868-e159-4e81-bb4d-66b292001170</uuid>
+  <locale>en_US</locale>
+  <definition>
+<DT xmlns="http://schemas.ilog.com/Rules/7.0/DecisionTable" Version="7.0">
+  <Body xmlns="http://schemas.ilog.com/Rules/7.0/DecisionTable">
+                <Properties>
+                    <Property Name="UI.MediaType"><![CDATA[Web]]></Property>
+                    <Property Name="OptimizedExpressions"><![CDATA[false]]></Property>
+                    <Property Name="OptimizedExpressionMemory"><![CDATA[false]]></Property>
+                    <Property Name="RowOrdering"><![CDATA[Manual]]></Property>
+                </Properties>
+                <Structure>
+                    <ConditionDefinitions>
+                        <ConditionDefinition Id="C0">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[the transaction type of TariffInput is one of <transaction type enums> ]]></Text>
+                            </ExpressionDefinition>
+                        </ConditionDefinition>
+                        <ConditionDefinition Id="C11">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[planCode is one of <strings> ]]></Text>
+                            </ExpressionDefinition>
+                        </ConditionDefinition>
+                        <ConditionDefinition Id="C1">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[the car type of TariffInput is <a string> ]]></Text>
+                            </ExpressionDefinition>
+                        </ConditionDefinition>
+                        <ConditionDefinition Id="C2">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[the usage of TariffInput is <an usage enum> ]]></Text>
+                            </ExpressionDefinition>
+                        </ConditionDefinition>
+                        <ConditionDefinition Id="C9">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[MakeModelResult is at least <min> and less than <max> ]]></Text>
+                            </ExpressionDefinition>
+                        </ConditionDefinition>
+                        <ConditionDefinition Id="C4">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[the capacity of TariffInput is at least <min> and less than <max> ]]></Text>
+                            </ExpressionDefinition>
+                        </ConditionDefinition>
+                        <ConditionDefinition Id="C5">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[the coverage of TariffInput is <a coverage enum> ]]></Text>
+                            </ExpressionDefinition>
+                        </ConditionDefinition>
+                        <ConditionDefinition Id="C10">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[the garage of TariffInput is one of <garage enums> ]]></Text>
+                            </ExpressionDefinition>
+                        </ConditionDefinition>
+                        <ConditionDefinition Id="C6">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[EffectiveDate is on or after <a simple date> and on or before <a simple date> ]]></Text>
+                            </ExpressionDefinition>
+                        </ConditionDefinition>
+                        <ConditionDefinition Id="C7">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[the make of the make model of TariffInput is one of <make enums> ]]></Text>
+                            </ExpressionDefinition>
+                        </ConditionDefinition>
+                        <ConditionDefinition Id="C8">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[the model of the make model of TariffInput is one of <model enums> ]]></Text>
+                            </ExpressionDefinition>
+                        </ConditionDefinition>
+                    </ConditionDefinitions>
+                    <ActionDefinitions>
+                        <ActionDefinition Id="A0">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[set BailBondSiResult to <a number>]]></Text>
+                            </ExpressionDefinition>
+                        </ActionDefinition>
+                        <ActionDefinition Id="A2">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[set  BiAccidentSiResult  to <a number> ]]></Text>
+                            </ExpressionDefinition>
+                        </ActionDefinition>
+                        <ActionDefinition Id="A3">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[set BiPersonSiResult to <a number>]]></Text>
+                            </ExpressionDefinition>
+                        </ActionDefinition>
+                        <ActionDefinition Id="A4">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[set DriverPassengerSiResult to <a number>]]></Text>
+                            </ExpressionDefinition>
+                        </ActionDefinition>
+                        <ActionDefinition Id="A5">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[set MedicalExpensePAResult to <a number>]]></Text>
+                            </ExpressionDefinition>
+                        </ActionDefinition>
+                        <ActionDefinition Id="A6">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[set PropAccidentSiResult to <a number>]]></Text>
+                            </ExpressionDefinition>
+                        </ActionDefinition>
+                    </ActionDefinitions>
+                </Structure>
+                <Contents>
+                    <Partition DefId="C0">
+                        <Condition>
+                            <Expression>
+                                <Param><![CDATA[{ NEWBUSINESS , RENEWAL }]]></Param>
+                            </Expression>
+                            <Partition DefId="C11">
+                                <Condition>
+                                    <Expression>
+                                        <Text><![CDATA[<an object> is not one of <objects>]]></Text>
+                                        <Param><![CDATA[{ "MPC_CM" }]]></Param>
+                                    </Expression>
+                                    <Partition DefId="C1">
+                                        <Condition>
+                                            <Expression>
+                                                <Param><![CDATA["SEDAN"]]></Param>
+                                            </Expression>
+                                            <Partition DefId="C2">
+                                                <Condition>
+                                                    <Expression>
+                                                        <Param><![CDATA[PRIVATE]]></Param>
+                                                    </Expression>
+                                                    <Partition DefId="C9">
+                                                        <Condition>
+                                                            <Expression>
+                                                                <Text><![CDATA[<a number> equals <a number>]]></Text>
+                                                                <Param><![CDATA[5]]></Param>
+                                                            </Expression>
+                                                            <Partition DefId="C4">
+                                                                <Condition>
+                                                                    <Expression>
+                                                                        <Param><![CDATA[0]]></Param>
+                                                                        <Param><![CDATA[2001]]></Param>
+                                                                    </Expression>
+                                                                    <Partition DefId="C5">
+                                                                        <Condition>
+                                                                            <Expression>
+                                                                                <Param><![CDATA[COMPREHENSIVE]]></Param>
+                                                                            </Expression>
+                                                                            <Partition DefId="C10">
+                                                                                <Condition>
+                                                                                    <Expression>
+                                                                                        <Param><![CDATA[{ NORMAL }]]></Param>
+                                                                                    </Expression>
+                                                                                    <Partition DefId="C6">
+                                                                                        <Condition>
+                                                                                            <Expression>
+                                                                                                <Param><![CDATA[4/1/2023]]></Param>
+                                                                                                <Param><![CDATA[12/31/2024]]></Param>
+                                                                                            </Expression>
+                                                                                            <Partition DefId="C7">
+                                                                                                <Condition>
+                                                                                                    <Expression>
+                                                                                                        <Param><![CDATA[{ CHEVROLET , FORD , HAVAL , HONDA , ISUZU , MAZDA , MG , MITSUBISHI , NISSAN , SUZUKI , TOYOTA , TR }]]></Param>
+                                                                                                    </Expression>
+                                                                                                    <Partition DefId="C8">
+                                                                                                        <Condition>
+                                                                                                            <Expression>
+                                                                                                                <Param><![CDATA[{ BR_V, CAPTIVA, COROLLA_CROSS, CR_V, CX_3, CX_30, CX_5, CX_8, C_HR, ECOSPORT, ESCAPE, EVEREST, FORTUNER, FREED, GS, H6, HS, HS_PHEV, JOLION, JUKE, KICKS, LIVINA, MU_7, MU_X, OUTLANDER, PAJERO_SPORT, TERRA, TRANSFORMER, TRANSFORMER_LL, VELOZ, XL7, XPANDER, X_TRAIL, ZS }]]></Param>
+                                                                                                            </Expression>
+                                                                                                            <ActionSet>
+                                                                                                                <Action DefId="A0">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[300000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A2">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[10000000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A3">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[500000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A4">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[100000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A5">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[100000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A6">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[5000000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                            </ActionSet>
+                                                                                                        </Condition>
+                                                                                                    </Partition>
+                                                                                                </Condition>
+                                                                                            </Partition>
+                                                                                        </Condition>
+                                                                                    </Partition>
+                                                                                </Condition>
+                                                                            </Partition>
+                                                                        </Condition>
+                                                                    </Partition>
+                                                                </Condition>
+                                                            </Partition>
+                                                        </Condition>
+                                                    </Partition>
+                                                </Condition>
+                                            </Partition>
+                                        </Condition>
+                                    </Partition>
+                                </Condition>
+                            </Partition>
+                        </Condition>
+                        <Condition>
+                            <Expression>
+                                <Param><![CDATA[{ NEWBUSINESS , RENEWAL }]]></Param>
+                            </Expression>
+                            <Partition DefId="C11">
+                                <Condition>
+                                    <Expression>
+                                        <Text><![CDATA[<an object> is not one of <objects>]]></Text>
+                                        <Param><![CDATA[{ "MPC_CM" }]]></Param>
+                                    </Expression>
+                                    <Partition DefId="C1">
+                                        <Condition>
+                                            <Expression>
+                                                <Param><![CDATA["SEDAN"]]></Param>
+                                            </Expression>
+                                            <Partition DefId="C2">
+                                                <Condition>
+                                                    <Expression>
+                                                        <Param><![CDATA[PRIVATE]]></Param>
+                                                    </Expression>
+                                                    <Partition DefId="C9">
+                                                        <Condition>
+                                                            <Expression>
+                                                                <Text><![CDATA[<a number> equals <a number>]]></Text>
+                                                                <Param><![CDATA[5]]></Param>
+                                                            </Expression>
+                                                            <Partition DefId="C4">
+                                                                <Condition>
+                                                                    <Expression>
+                                                                        <Param><![CDATA[0]]></Param>
+                                                                        <Param><![CDATA[2001]]></Param>
+                                                                    </Expression>
+                                                                    <Partition DefId="C5">
+                                                                        <Condition>
+                                                                            <Expression>
+                                                                                <Param><![CDATA[COMPREHENSIVE]]></Param>
+                                                                            </Expression>
+                                                                            <Partition DefId="C10">
+                                                                                <Condition>
+                                                                                    <Expression>
+                                                                                        <Param><![CDATA[{ NORMAL }]]></Param>
+                                                                                    </Expression>
+                                                                                    <Partition DefId="C6">
+                                                                                        <Condition>
+                                                                                            <Expression>
+                                                                                                <Param><![CDATA[4/1/2023]]></Param>
+                                                                                                <Param><![CDATA[12/31/2024]]></Param>
+                                                                                            </Expression>
+                                                                                            <Partition DefId="C7">
+                                                                                                <Condition>
+                                                                                                    <Expression>
+                                                                                                        <Param><![CDATA[{ CHEVROLET , DUCATI , HYUNDAI , ISUZU , MINI , MITSUBISHI , SUBARU , TOYOTA , VOLKSWAGEN , VOLVO }]]></Param>
+                                                                                                    </Expression>
+                                                                                                    <Partition DefId="C8">
+                                                                                                        <Condition>
+                                                                                                            <Expression>
+                                                                                                                <Param><![CDATA[{ ALPHARD , BEETLE , CAPTIVA , COOPER , ESQUIRE , ESTIMA , GRAND_STAREX , HARRIER , H_1 , IMPREZA , LANDCRUISER_PRADO , LEGACY , MONSTER1200 , MU_7 , MU_X , ONE , OUTBACK , OUTLANDER , PAJERO_SPORT , S60 , S80 , S90 , TUCSON , V40 , V90 , VELLFIRE , VELOSTER , VENTURY , VOXY , XC40 , XC60 , XC90 , XPANDER }]]></Param>
+                                                                                                            </Expression>
+                                                                                                            <ActionSet>
+                                                                                                                <Action DefId="A0">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[300000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A2">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[10000000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A3">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[1000000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A4">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[100000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A5">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[100000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A6">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[5000000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                            </ActionSet>
+                                                                                                        </Condition>
+                                                                                                    </Partition>
+                                                                                                </Condition>
+                                                                                            </Partition>
+                                                                                        </Condition>
+                                                                                    </Partition>
+                                                                                </Condition>
+                                                                            </Partition>
+                                                                        </Condition>
+                                                                    </Partition>
+                                                                </Condition>
+                                                            </Partition>
+                                                        </Condition>
+                                                    </Partition>
+                                                </Condition>
+                                            </Partition>
+                                        </Condition>
+                                    </Partition>
+                                </Condition>
+                            </Partition>
+                        </Condition>
+                        <Condition>
+                            <Expression>
+                                <Param><![CDATA[{ NEWBUSINESS , RENEWAL }]]></Param>
+                            </Expression>
+                            <Partition DefId="C11">
+                                <Condition>
+                                    <Expression>
+                                        <Param><![CDATA[{ "NON-EV-SUV" }]]></Param>
+                                    </Expression>
+                                    <Partition DefId="C1">
+                                        <Condition>
+                                            <Expression>
+                                                <Param><![CDATA["SEDAN"]]></Param>
+                                            </Expression>
+                                            <Partition DefId="C2">
+                                                <Condition>
+                                                    <Expression>
+                                                        <Param><![CDATA[PRIVATE]]></Param>
+                                                    </Expression>
+                                                    <Partition DefId="C9">
+                                                        <Condition>
+                                                            <Expression>
+                                                                <Text><![CDATA[<a number> equals <a number>]]></Text>
+                                                                <Param><![CDATA[5]]></Param>
+                                                            </Expression>
+                                                            <Partition DefId="C4">
+                                                                <Condition>
+                                                                    <Expression>
+                                                                        <Param><![CDATA[0]]></Param>
+                                                                        <Param><![CDATA[2001]]></Param>
+                                                                    </Expression>
+                                                                    <Partition DefId="C5">
+                                                                        <Condition>
+                                                                            <Expression>
+                                                                                <Param><![CDATA[COMPREHENSIVE]]></Param>
+                                                                            </Expression>
+                                                                            <Partition DefId="C10">
+                                                                                <Condition>
+                                                                                    <Expression>
+                                                                                        <Param><![CDATA[{ DEALER }]]></Param>
+                                                                                    </Expression>
+                                                                                    <Partition DefId="C6">
+                                                                                        <Condition>
+                                                                                            <Expression>
+                                                                                                <Param><![CDATA[4/1/2023]]></Param>
+                                                                                                <Param><![CDATA[12/31/2024]]></Param>
+                                                                                            </Expression>
+                                                                                            <Partition DefId="C7">
+                                                                                                <Condition>
+                                                                                                    <Expression>
+                                                                                                        <Param><![CDATA[{ HONDA , MAZDA , TOYOTA }]]></Param>
+                                                                                                    </Expression>
+                                                                                                    <Partition DefId="C8">
+                                                                                                        <Condition>
+                                                                                                            <Expression>
+                                                                                                                <Param><![CDATA[{ COROLLA_CROSS , CR_V , CX_3 , CX_30 , CX_5 , FORTUNER }]]></Param>
+                                                                                                            </Expression>
+                                                                                                            <ActionSet>
+                                                                                                                <Action DefId="A0">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[500,000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A2">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[10,000,000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A3">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[1,000,000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A4">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[200,000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A5">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[200,000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A6">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[1,000,000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                            </ActionSet>
+                                                                                                        </Condition>
+                                                                                                    </Partition>
+                                                                                                </Condition>
+                                                                                            </Partition>
+                                                                                        </Condition>
+                                                                                    </Partition>
+                                                                                </Condition>
+                                                                            </Partition>
+                                                                        </Condition>
+                                                                    </Partition>
+                                                                </Condition>
+                                                            </Partition>
+                                                        </Condition>
+                                                    </Partition>
+                                                </Condition>
+                                            </Partition>
+                                        </Condition>
+                                    </Partition>
+                                </Condition>
+                            </Partition>
+                        </Condition>
+                        <Condition>
+                            <Expression>
+                                <Param><![CDATA[{ NEWBUSINESS, RENEWAL }]]></Param>
+                            </Expression>
+                            <Partition DefId="C11">
+                                <Condition>
+                                    <Expression>
+                                        <Param><![CDATA[{ "NON-EV-SUV" }]]></Param>
+                                    </Expression>
+                                    <Partition DefId="C1">
+                                        <Condition>
+                                            <Expression>
+                                                <Param><![CDATA["SEDAN"]]></Param>
+                                            </Expression>
+                                            <Partition DefId="C2">
+                                                <Condition>
+                                                    <Expression>
+                                                        <Param><![CDATA[PRIVATE]]></Param>
+                                                    </Expression>
+                                                    <Partition DefId="C9">
+                                                        <Condition>
+                                                            <Expression>
+                                                                <Text><![CDATA[<a number> equals <a number>]]></Text>
+                                                                <Param><![CDATA[5]]></Param>
+                                                            </Expression>
+                                                            <Partition DefId="C4">
+                                                                <Condition>
+                                                                    <Expression>
+                                                                        <Param><![CDATA[0]]></Param>
+                                                                        <Param><![CDATA[2001]]></Param>
+                                                                    </Expression>
+                                                                    <Partition DefId="C5">
+                                                                        <Condition>
+                                                                            <Expression>
+                                                                                <Param><![CDATA[COMPREHENSIVE]]></Param>
+                                                                            </Expression>
+                                                                            <Partition DefId="C10">
+                                                                                <Condition>
+                                                                                    <Expression>
+                                                                                        <Param><![CDATA[{ NORMAL }]]></Param>
+                                                                                    </Expression>
+                                                                                    <Partition DefId="C6">
+                                                                                        <Condition>
+                                                                                            <Expression>
+                                                                                                <Param><![CDATA[4/1/2023]]></Param>
+                                                                                                <Param><![CDATA[12/31/2024]]></Param>
+                                                                                            </Expression>
+                                                                                            <Partition DefId="C7">
+                                                                                                <Condition>
+                                                                                                    <Expression>
+                                                                                                        <Param><![CDATA[{ HONDA , MAZDA , TOYOTA }]]></Param>
+                                                                                                    </Expression>
+                                                                                                    <Partition DefId="C8">
+                                                                                                        <Condition>
+                                                                                                            <Expression>
+                                                                                                                <Param><![CDATA[{ COROLLA_CROSS , CR_V , CX_3 , CX_30 , CX_5 , FORTUNER }]]></Param>
+                                                                                                            </Expression>
+                                                                                                            <ActionSet>
+                                                                                                                <Action DefId="A0">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[200000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A2">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[10000000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A3">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[500000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A4">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[100000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A5">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[100000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A6">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[1000000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                            </ActionSet>
+                                                                                                        </Condition>
+                                                                                                    </Partition>
+                                                                                                </Condition>
+                                                                                            </Partition>
+                                                                                        </Condition>
+                                                                                    </Partition>
+                                                                                </Condition>
+                                                                            </Partition>
+                                                                        </Condition>
+                                                                    </Partition>
+                                                                </Condition>
+                                                            </Partition>
+                                                        </Condition>
+                                                    </Partition>
+                                                </Condition>
+                                            </Partition>
+                                        </Condition>
+                                    </Partition>
+                                </Condition>
+                            </Partition>
+                        </Condition>
+                        <Condition>
+                            <Expression>
+                                <Param><![CDATA[{ NEWBUSINESS, RENEWAL }]]></Param>
+                            </Expression>
+                            <Partition DefId="C11">
+                                <Condition>
+                                    <Expression>
+                                        <Param><![CDATA[{ "MPC_VM" }]]></Param>
+                                    </Expression>
+                                    <Partition DefId="C1">
+                                        <Condition>
+                                            <Expression>
+                                                <Param><![CDATA["SEDAN"]]></Param>
+                                            </Expression>
+                                            <Partition DefId="C2">
+                                                <Condition>
+                                                    <Expression>
+                                                        <Param><![CDATA[PRIVATE]]></Param>
+                                                    </Expression>
+                                                    <Partition DefId="C9">
+                                                        <Condition>
+                                                            <Expression>
+                                                                <Text><![CDATA[<a number> equals <a number>]]></Text>
+                                                                <Param><![CDATA[3]]></Param>
+                                                            </Expression>
+                                                            <Partition DefId="C4">
+                                                                <Condition>
+                                                                    <Expression>
+                                                                        <Param><![CDATA[0]]></Param>
+                                                                        <Param><![CDATA[2001]]></Param>
+                                                                    </Expression>
+                                                                    <Partition DefId="C5">
+                                                                        <Condition>
+                                                                            <Expression>
+                                                                                <Param><![CDATA[COMPREHENSIVE]]></Param>
+                                                                            </Expression>
+                                                                            <Partition DefId="C10">
+                                                                                <Condition>
+                                                                                    <Expression>
+                                                                                        <Param><![CDATA[{ NORMAL }]]></Param>
+                                                                                    </Expression>
+                                                                                    <Partition DefId="C6">
+                                                                                        <Condition>
+                                                                                            <Expression>
+                                                                                                <Param><![CDATA[4/1/2023]]></Param>
+                                                                                                <Param><![CDATA[12/31/2024]]></Param>
+                                                                                            </Expression>
+                                                                                            <Partition DefId="C7">
+                                                                                                <Condition>
+                                                                                                    <Expression>
+                                                                                                        <Param><![CDATA[{ FORD }]]></Param>
+                                                                                                    </Expression>
+                                                                                                    <Partition DefId="C8">
+                                                                                                        <Condition>
+                                                                                                            <Expression>
+                                                                                                                <Param><![CDATA[{ FIESTA }]]></Param>
+                                                                                                            </Expression>
+                                                                                                            <ActionSet>
+                                                                                                                <Action DefId="A0">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[200000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A2">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[10000000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A3">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[1000000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A4">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[100,000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A5">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[100000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                                <Action DefId="A6">
+                                                                                                                    <Expression>
+                                                                                                                        <Param><![CDATA[2500000]]></Param>
+                                                                                                                    </Expression>
+                                                                                                                </Action>
+                                                                                                            </ActionSet>
+                                                                                                        </Condition>
+                                                                                                    </Partition>
+                                                                                                </Condition>
+                                                                                            </Partition>
+                                                                                        </Condition>
+                                                                                    </Partition>
+                                                                                </Condition>
+                                                                            </Partition>
+                                                                        </Condition>
+                                                                    </Partition>
+                                                                </Condition>
+                                                            </Partition>
+                                                        </Condition>
+                                                    </Partition>
+                                                </Condition>
+                                            </Partition>
+                                        </Condition>
+                                    </Partition>
+                                </Condition>
+                            </Partition>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                        <Condition>
+                            <Expression/>
+                            <ActionSet/>
+                        </Condition>
+                    </Partition>
+                </Contents>
+            </Body>
+  <Resources DefaultLocale="en_US" xmlns="http://schemas.ilog.com/Rules/7.0/DecisionTable">
+                <ResourceSet Locale="en_US">
+                    <Data Name="Definitions(A5)[0]#HeaderText"><![CDATA[a number]]></Data>
+                    <Data Name="Definitions(A0)[0]#HeaderText"><![CDATA[a number]]></Data>
+                    <Data Name="Definitions(C6)[0]#HeaderText"><![CDATA[From]]></Data>
+                    <Data Name="Definitions(C6)[1]#HeaderText"><![CDATA[To]]></Data>
+                    <Data Name="Definitions(C0)#HeaderText"><![CDATA[Transaction Type]]></Data>
+                    <Data Name="Definitions(C1)#HeaderText"><![CDATA[Car Type]]></Data>
+                    <Data Name="Definitions(A4)[0]#HeaderText"><![CDATA[a number]]></Data>
+                    <Data Name="Definitions(A3)[0]#HeaderText"><![CDATA[a number]]></Data>
+                    <Data Name="Definitions(C6)#HeaderText"><![CDATA[Effective Date]]></Data>
+                    <Data Name="Definitions(C7)#HeaderText"><![CDATA[Make]]></Data>
+                    <Data Name="Definitions(A4)#HeaderText"><![CDATA[Driver Passenger Si]]></Data>
+                    <Data Name="Definitions(A6)#HeaderText"><![CDATA[Prop Accident Si]]></Data>
+                    <Data Name="Definitions(C9)#HeaderText"><![CDATA[Make and Model Result]]></Data>
+                    <Data Name="Definitions(C4)#HeaderText"><![CDATA[Capacity]]></Data>
+                    <Data Name="Definitions(C5)#HeaderText"><![CDATA[Coverage]]></Data>
+                    <Data Name="Definitions(C8)#HeaderText"><![CDATA[Model]]></Data>
+                    <Data Name="Definitions(C11)#HeaderText"><![CDATA[Plan Code]]></Data>
+                    <Data Name="Definitions(A3)#HeaderText"><![CDATA[Bi Person Si]]></Data>
+                    <Data Name="Definitions(C2)#HeaderText"><![CDATA[Usage]]></Data>
+                    <Data Name="Definitions(C10)#HeaderText"><![CDATA[Garage]]></Data>
+                    <Data Name="Definitions(C0)[0]#HeaderText"><![CDATA[a transaction type enum]]></Data>
+                    <Data Name="Definitions(A0)#HeaderText"><![CDATA[Bi BailBond Si]]></Data>
+                    <Data Name="Definitions(A2)#HeaderText"><![CDATA[Bi Accident Si]]></Data>
+                    <Data Name="Definitions(C8)[0]#HeaderText"><![CDATA[an object]]></Data>
+                    <Data Name="Definitions(A2)[0]#HeaderText"><![CDATA[a number]]></Data>
+                    <Data Name="Definitions(A6)[0]#HeaderText"><![CDATA[a number]]></Data>
+                    <Data Name="Definitions(C7)[0]#HeaderText"><![CDATA[a make model]]></Data>
+                    <Data Name="Definitions(A5)#HeaderText"><![CDATA[Medical Expense]]></Data>
+                </ResourceSet>
+            </Resources>
+</DT>
+</definition>
+</ilog.rules.studio.model.dt:DecisionTable>

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.dt:DecisionTable xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.dt="http://ilog.rules.studio/model/dt.ecore">
+  <name>CCTV Discount Table</name>
+  <uuid>22def099-e687-46a9-add8-0ec89dc21965</uuid>
+  <locale>en_US</locale>
+  <definition>
+<DT xmlns="http://schemas.ilog.com/Rules/7.0/DecisionTable" Version="7.0">
+  <Body xmlns="http://schemas.ilog.com/Rules/7.0/DecisionTable">
+    <Properties>
+      <Property Name="UI.MediaType"><![CDATA[Web]]></Property>
+      <Property Name="OptimizedExpressionMemory"><![CDATA[false]]></Property>
+      <Property Name="OptimizedExpressions"><![CDATA[false]]></Property>
+      <Property Name="RowOrdering"><![CDATA[Manual]]></Property>
+    </Properties>
+    <Structure>
+      <ConditionDefinitions>
+        <ConditionDefinition Id="C2">
+          <ExpressionDefinition>
+            <Text><![CDATA[planCode is one of <strings> ]]></Text>
+          </ExpressionDefinition>
+        </ConditionDefinition>
+        <ConditionDefinition Id="C0">
+          <ExpressionDefinition>
+            <Text><![CDATA[the cctv percent of the discount of TariffInput is at least <min> and less than <max> ]]></Text>
+          </ExpressionDefinition>
+        </ConditionDefinition>
+      </ConditionDefinitions>
+      <ActionDefinitions>
+        <ActionDefinition Id="A0">
+          <ExpressionDefinition>
+            <Text><![CDATA[set CCTVDiscountRangeResult to <a number> ]]></Text>
+          </ExpressionDefinition>
+        </ActionDefinition>
+      </ActionDefinitions>
+    </Structure>
+    <Contents>
+      <Partition DefId="C2">
+        <Condition>
+          <Expression>
+            <Param><![CDATA[{ "MPC_VM" }]]></Param>
+          </Expression>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression>
+                <Param><![CDATA[0]]></Param>
+                <Param><![CDATA[5]]></Param>
+              </Expression>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression>
+                    <Param><![CDATA[0]]></Param>
+                  </Expression>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression>
+            <Param><![CDATA[{ "MPC_VM" }]]></Param>
+          </Expression>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression>
+                <Text><![CDATA[<a number> is at least <a number>]]></Text>
+                <Param><![CDATA[5]]></Param>
+              </Expression>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression>
+                    <Param><![CDATA[0]]></Param>
+                  </Expression>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C0">
+            <Condition>
+              <Expression/>
+              <ActionSet>
+                <Action DefId="A0">
+                  <Expression/>
+                </Action>
+              </ActionSet>
+            </Condition>
+          </Partition>
+        </Condition>
+      </Partition>
+    </Contents>
+  </Body>
+  <Resources DefaultLocale="en_US" xmlns="http://schemas.ilog.com/Rules/7.0/DecisionTable">
+    <ResourceSet Locale="en_US">
+      <Data Name="Definitions(C0)#HeaderText"><![CDATA[CCTV Percent]]></Data>
+      <Data Name="Definitions(C2)#HeaderText"><![CDATA[Plan Code]]></Data>
+      <Data Name="Definitions(C0)[0]#HeaderText"><![CDATA[min]]></Data>
+      <Data Name="Definitions(A0)#HeaderText"><![CDATA[Rate]]></Data>
+      <Data Name="Definitions(C0)[1]#HeaderText"><![CDATA[max]]></Data>
+    </ResourceSet>
+  </Resources>
+</DT>
+</definition>
+</ilog.rules.studio.model.dt:DecisionTable>

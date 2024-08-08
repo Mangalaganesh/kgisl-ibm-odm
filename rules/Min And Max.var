@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>Min And Max</name>
+  <uuid>92aba229-5a00-4ee3-9004-4099bf51cfed</uuid>
+  <documentation><![CDATA[]]></documentation>
+  <variables name="MINBasePremiumResult" type="double" initialValue="" verbalization="MINBasePremiumResult"/>
+  <variables name="MAXBasePremiumResult" type="double" initialValue="" verbalization="MAXBasePremiumResult"/>
+  <variables name="MAXPADriverRangeResult" type="double" initialValue="" verbalization="MAXPADriverRangeResult"/>
+  <variables name="MINPADriverRangeResult" type="double" initialValue="" verbalization="MINPADriverRangeResult"/>
+  <variables name="MINPAPassengerRangeResult" type="double" initialValue="" verbalization="MINPAPassengerRangeResult"/>
+  <variables name="MAXPAPassengerRangeResult" type="double" initialValue="" verbalization="MAXPAPassengerRangeResult"/>
+</ilog.rules.studio.model.base:VariableSet>

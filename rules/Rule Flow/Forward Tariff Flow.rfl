@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.ruleflow:RuleFlow xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.ruleflow="http://ilog.rules.studio/model/ruleflow.ecore">
+  <name>Forward Tariff Flow</name>
+  <uuid>5044ce5c-7216-44de-b1a6-ff60f3db7538</uuid>
+  <locale>en_US</locale>
+  <categories>any</categories>
+  <rfModel>
+<Ruleflow xmlns="http://schemas.ilog.com/Rules/7.0/Ruleflow">
+    <Body>
+        <TaskList>
+            <StartTask Identifier="task_1"/>
+            <StopTask Identifier="task_2"/>
+            <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_0" Ordering="Default">
+                <RuleList>
+                    <Rule Uuid="5068d18c-c94e-4b91-ae77-d07e41f3764f"/>
+                    <Rule Uuid="62774caa-0bcd-437c-b9d6-e180e39158a2"/>
+                    <Rule Uuid="16805b70-edc7-4247-ba97-ef7e39523dd6"/>
+                    <Rule Uuid="3915eed3-730a-411f-9c11-a76c187a4354"/>
+                    <Rule Uuid="7f0416ac-e277-479d-824f-711bf4ab0892"/>
+                    <Rule Uuid="0f13d7c4-dd8e-462c-ba94-2454639b5aea"/>
+                    <Rule Uuid="821487a3-12ac-4835-83a4-a0db4f2bd4ba"/>
+                    <Rule Uuid="843f7baf-ed5a-478b-b527-cc308feb6459"/>
+                    <Rule Uuid="8b3af337-af6a-45ad-a3f3-fd94ba7fbe5b"/>
+                    <Rule Uuid="22b0b64b-5477-4e37-95f9-0b8e8cdb68e1"/>
+                    <Rule Uuid="dec89179-934a-4950-82c8-4e5469c7ea0e"/>
+                    <Rule Uuid="cb95437d-fb1d-4a91-8344-fa35d49f7129"/>
+                    <Rule Uuid="f85f7edd-d177-4cf6-86c5-b75f6bd13d8f"/>
+                    <Rule Uuid="dac0193b-711f-4aed-bad5-de2209fc3549"/>
+                    <Rule Uuid="7b343e98-4b56-4e94-99bb-6b4e27952786"/>
+                    <Rule Uuid="76ebc688-7647-43ab-a95e-07952de32dbf"/>
+                    <Rule Uuid="22def099-e687-46a9-add8-0ec89dc21965"/>
+                    <Rule Uuid="0ae33a5f-0701-4827-94ab-82179f506419"/>
+                    <Rule Uuid="9b2e35b6-57c3-40e2-8478-35087dacb15a"/>
+                    <Rule Uuid="7d36d65c-c752-4393-8520-1a84ff569f18"/>
+                    <Rule Uuid="20b7a0e3-8211-46ae-a4da-b92b65f0de93"/>
+                </RuleList>
+            </RuleTask>
+            <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_1" Ordering="Default">
+                <RuleList>
+                    <Rule Uuid="85f60124-828b-4351-bafa-5d64049dd9ca"/>
+                    <Rule Uuid="5e294868-e159-4e81-bb4d-66b292001170"/>
+                </RuleList>
+            </RuleTask>
+            <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_2" Ordering="Default">
+                <RuleList>
+                    <Rule Uuid="a85eac60-e498-49f6-bec0-4367c62d11eb"/>
+                    <Rule Uuid="0614e6ac-df18-49a3-89ce-78773df44354"/>
+                    <Rule Uuid="292e4f5a-adeb-41e6-b714-faa724d17c33"/>
+                    <Rule Uuid="09c20b8e-7931-4614-8e70-5d2555cf8c89"/>
+                    <Rule Uuid="81f23e14-d250-4e8c-8daf-317eb4b9bdf3"/>
+                </RuleList>
+            </RuleTask>
+            <SubflowTask Identifier="subflow_0" Uuid="0689f8a6-76b1-468e-b419-b500edd28c53"/>
+        </TaskList>
+        <NodeList>
+            <TaskNode Identifier="node_0" Task="task_1"/>
+            <TaskNode Identifier="node_1" Task="task_2"/>
+            <TaskNode Identifier="node_2" Task="rule_0"/>
+            <TaskNode Identifier="node_3" Task="rule_1"/>
+            <TaskNode Identifier="node_4" Task="rule_2"/>
+            <TaskNode Identifier="node_5" Task="subflow_0"/>
+        </NodeList>
+        <TransitionList>
+            <Transition Identifier="transition_2" Source="node_3" Target="node_4"/>
+            <Transition Identifier="transition_4" Source="node_4" Target="node_5"/>
+            <Transition Identifier="transition_5" Source="node_5" Target="node_1"/>
+            <Transition Identifier="transition_0" Source="node_0" Target="node_2"/>
+            <Transition Identifier="transition_1" Source="node_2" Target="node_3"/>
+        </TransitionList>
+    </Body>
+    <Resources>
+        <ResourceSet Locale="en_US">
+            <Data Name="node_0#name">node_0</Data>
+            <Data Name="node_0#x">108.82674</Data>
+            <Data Name="node_0#y">-0.15481567</Data>
+            <Data Name="node_1#name">node_1</Data>
+            <Data Name="node_1#x">108.82674</Data>
+            <Data Name="node_1#y">389.84518</Data>
+            <Data Name="node_2#label">First Level Decision</Data>
+            <Data Name="node_2#name">node_2</Data>
+            <Data Name="node_2#x">39.850174</Data>
+            <Data Name="node_2#y">69.845184</Data>
+            <Data Name="node_3#label">Second Level Decision</Data>
+            <Data Name="node_3#name">node_3</Data>
+            <Data Name="node_3#x">30.225174</Data>
+            <Data Name="node_3#y">149.84518</Data>
+            <Data Name="node_4#label">Third Leve Decision</Data>
+            <Data Name="node_4#name">node_4</Data>
+            <Data Name="node_4#x">39.4908</Data>
+            <Data Name="node_4#y">229.84518</Data>
+            <Data Name="node_5#label">Final Calculation  Rule Flow</Data>
+            <Data Name="node_5#name">node_5</Data>
+            <Data Name="node_5#x">14.4804535</Data>
+            <Data Name="node_5#y">309.84518</Data>
+        </ResourceSet>
+    </Resources>
+    <Properties>
+        <imports/>
+    </Properties>
+</Ruleflow>
+</rfModel>
+</ilog.rules.studio.model.ruleflow:RuleFlow>

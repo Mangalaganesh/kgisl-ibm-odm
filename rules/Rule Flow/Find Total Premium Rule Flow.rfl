@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.ruleflow:RuleFlow xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.ruleflow="http://ilog.rules.studio/model/ruleflow.ecore">
+  <name>Find Total Premium Rule Flow</name>
+  <uuid>b821a1f7-93bd-453c-9bbe-a42788a245f4</uuid>
+  <locale>en_US</locale>
+  <categories>any</categories>
+  <rfModel>
+<Ruleflow xmlns="http://schemas.ilog.com/Rules/7.0/Ruleflow">
+  <Body>
+    <TaskList>
+      <StartTask Identifier="task_1"/>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="1stlvl" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="0f13d7c4-dd8e-462c-ba94-2454639b5aea"/>
+          <Rule Uuid="821487a3-12ac-4835-83a4-a0db4f2bd4ba"/>
+          <Rule Uuid="843f7baf-ed5a-478b-b527-cc308feb6459"/>
+          <Rule Uuid="f85f7edd-d177-4cf6-86c5-b75f6bd13d8f"/>
+          <Rule Uuid="dac0193b-711f-4aed-bad5-de2209fc3549"/>
+          <Rule Uuid="7f0416ac-e277-479d-824f-711bf4ab0892"/>
+          <Rule Uuid="8b3af337-af6a-45ad-a3f3-fd94ba7fbe5b"/>
+          <Rule Uuid="3915eed3-730a-411f-9c11-a76c187a4354"/>
+          <Rule Uuid="7b343e98-4b56-4e94-99bb-6b4e27952786"/>
+          <Rule Uuid="5068d18c-c94e-4b91-ae77-d07e41f3764f"/>
+          <Rule Uuid="e43987e5-b69b-4bee-b85e-e2cf8d0b16ee"/>
+          <Rule Uuid="a4ce1d44-139c-41f1-a9d3-342a56913f23"/>
+          <Rule Uuid="76ebc688-7647-43ab-a95e-07952de32dbf"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="2ndlvl" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="5e294868-e159-4e81-bb4d-66b292001170"/>
+          <Rule Uuid="85f60124-828b-4351-bafa-5d64049dd9ca"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="3rdlvl" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="a85eac60-e498-49f6-bec0-4367c62d11eb"/>
+          <Rule Uuid="292e4f5a-adeb-41e6-b714-faa724d17c33"/>
+          <Rule Uuid="0614e6ac-df18-49a3-89ce-78773df44354"/>
+          <Rule Uuid="09c20b8e-7931-4614-8e70-5d2555cf8c89"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="TotPrem" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="81f23e14-d250-4e8c-8daf-317eb4b9bdf3"/>
+        </RuleList>
+      </RuleTask>
+      <StopTask Identifier="task_2"/>
+    </TaskList>
+    <NodeList>
+      <TaskNode Identifier="node_0" Task="task_1"/>
+      <TaskNode Identifier="node_1" Task="task_2"/>
+      <TaskNode Identifier="node_13" Task="1stlvl"/>
+      <TaskNode Identifier="node_3" Task="2ndlvl"/>
+      <TaskNode Identifier="node_4" Task="3rdlvl"/>
+      <TaskNode Identifier="node_2" Task="TotPrem"/>
+    </NodeList>
+    <TransitionList>
+      <Transition Identifier="transition_11" Source="node_0" Target="node_13"/>
+      <Transition Identifier="transition_0" Source="node_13" Target="node_3"/>
+      <Transition Identifier="transition_1" Source="node_3" Target="node_4"/>
+      <Transition Identifier="transition_4" Source="node_4" Target="node_2"/>
+      <Transition Identifier="transition_2" Source="node_2" Target="node_1"/>
+      <Transition Identifier="transition_3" Source="node_3" Target="node_2">
+        <Conditions Language="bal"><![CDATA[planCode is "MPC_CM"]]></Conditions>
+      </Transition>
+    </TransitionList>
+  </Body>
+  <Resources>
+    <ResourceSet Locale="en_US">
+      <Data Name="node_4#width">102.0</Data>
+      <Data Name="node_4#height">68.103516</Data>
+      <Data Name="transition_3#label">Else</Data>
+      <Data Name="node_2#name">node_2</Data>
+      <Data Name="node_13#x">-1226.8835</Data>
+      <Data Name="node_13#y">150.92494</Data>
+      <Data Name="node_3#label">Second Level Impl</Data>
+      <Data Name="node_3#y">150.92494</Data>
+      <Data Name="node_4#x">-846.9072</Data>
+      <Data Name="node_4#y">151.92494</Data>
+      <Data Name="node_0#x">-1296.8835</Data>
+      <Data Name="node_0#y">155.92494</Data>
+      <Data Name="node_1#x">-534.4385</Data>
+      <Data Name="node_1#y">230.92494</Data>
+      <Data Name="node_2#x">-659.39685</Data>
+      <Data Name="node_3#x">-1051.2446</Data>
+      <Data Name="node_2#y">150.92494</Data>
+      <Data Name="node_1#name">node_1</Data>
+      <Data Name="node_13#label">First level Impl</Data>
+      <Data Name="node_2#label">Vehicle Age total Premium</Data>
+      <Data Name="node_4#name">node_4</Data>
+      <Data Name="node_0#name">node_0</Data>
+      <Data Name="node_4#label">Third Level impl</Data>
+      <Data Name="node_13#name">node_13</Data>
+      <Data Name="node_3#name">node_3</Data>
+    </ResourceSet>
+  </Resources>
+  <Properties>
+    <imports/>
+  </Properties>
+</Ruleflow>
+</rfModel>
+</ilog.rules.studio.model.ruleflow:RuleFlow>

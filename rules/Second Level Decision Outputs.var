@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>Second Level Decision Outputs</name>
+  <uuid>c93250bc-bd3e-491d-a61a-ae536b899d29</uuid>
+  <documentation><![CDATA[]]></documentation>
+  <variables name="ThirdPartyAndPaResult" type="main.tariffcalculation.ThirdPartyAndPa" initialValue="" verbalization="ThirdPartyAndPaResult"/>
+  <variables name="CarGroupResult" type="double" initialValue="" verbalization="CarGroupResult"/>
+</ilog.rules.studio.model.base:VariableSet>

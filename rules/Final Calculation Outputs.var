@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>Final Calculation Outputs</name>
+  <uuid>fc61863b-05c7-4397-bc60-62e3d7430156</uuid>
+  <documentation><![CDATA[]]></documentation>
+  <variables name="UsageOutput" type="double" initialValue="" verbalization="UsageOutput"/>
+  <variables name="CapacityOutput" type="double" initialValue="" verbalization="CapacityOutput"/>
+  <variables name="DriverAgeOutput" type="double" initialValue="" verbalization="DriverAgeOutput"/>
+  <variables name="CarAgeOutput" type="double" initialValue="" verbalization="CarAgeOutput"/>
+  <variables name="SumInsuredOutput" type="double" initialValue="" verbalization="SumInsuredOutput"/>
+  <variables name="CarGroupOutput" type="double" initialValue="" verbalization="CarGroupOutput"/>
+  <variables name="TPBiPersonOutput" type="double" initialValue="" verbalization="TPBiPersonOutput"/>
+  <variables name="TPBiAccidentOutput" type="double" initialValue="" verbalization="TPBiAccidentOutput"/>
+  <variables name="TPPropAccidentOutput" type="double" initialValue="" verbalization="TPPropAccidentOutput"/>
+  <variables name="PaDriverAmountOutput" type="double" initialValue="" verbalization="PaDriverAmountOutput"/>
+  <variables name="AfterDriverAmoutOutput" type="double" initialValue="" verbalization="AfterDriverAmoutOutput"/>
+  <variables name="PaPassengerAmountOutput" type="double" initialValue="" verbalization="PaPassengerAmountOutput"/>
+  <variables name="AfterPassengerAmountOutput" type="double" initialValue="" verbalization="AfterPassengerAmountOutput"/>
+  <variables name="PaMedicalExpenseOutput" type="double" initialValue="" verbalization="PaMedicalExpenseOutput"/>
+  <variables name="AfterMedicalExpenseOutput" type="double" initialValue="" verbalization="AfterMedicalExpenseOutput"/>
+  <variables name="PaBailBondOutput" type="double" initialValue="" verbalization="PaBailBondOutput"/>
+  <variables name="AfterBailBondOutput" type="double" initialValue="" verbalization="AfterBailBondOutput"/>
+  <variables name="PaSumAmountOutput" type="double" initialValue="" verbalization="PaSumAmountOutput"/>
+  <variables name="AfterPaAmountOutput" type="double" initialValue="" verbalization="AfterPaAmountOutput"/>
+  <variables name="AfterDeductibleOutput" type="double" initialValue="" verbalization="AfterDeductibleOutput"/>
+  <variables name="FleetDiscountOutput" type="double" initialValue="" verbalization="FleetDiscountOutput"/>
+  <variables name="AfterFleetDiscountOutput" type="double" initialValue="" verbalization="AfterFleetDiscountOutput"/>
+  <variables name="NcbDiscountOutput" type="double" initialValue="" verbalization="NcbDiscountOutput"/>
+  <variables name="AfterNcbDiscountOutput" type="double" initialValue="" verbalization="AfterNcbDiscountOutput"/>
+  <variables name="DirectDiscountOutput" type="double" initialValue="" verbalization="DirectDiscountOutput"/>
+  <variables name="AfterDirectDiscountOutput" type="double" initialValue="" verbalization="AfterDirectDiscountOutput"/>
+  <variables name="RedPlateDiscountOutput" type="double" initialValue="" verbalization="RedPlateDiscountOutput"/>
+  <variables name="AfterRedPlateDiscountOutput" type="double" initialValue="" verbalization="AfterRedPlateDiscountOutput"/>
+  <variables name="CctvDiscountOutput" type="double" initialValue="" verbalization="CctvDiscountOutput"/>
+  <variables name="AfterCctvDiscountOutput" type="double" initialValue="" verbalization="AfterCctvDiscountOutput"/>
+  <variables name="AnnualPremiumOutput" type="double" initialValue="" verbalization="AnnualPremiumOutput"/>
+  <variables name="GrossPremiumOutput" type="double" initialValue="" verbalization="GrossPremiumOutput"/>
+  <variables name="StampDutyOutput" type="double" initialValue="" verbalization="StampDutyOutput"/>
+  <variables name="PremiumBeforeVatOutput" type="double" initialValue="" verbalization="PremiumBeforeVatOutput"/>
+  <variables name="VatAmountOutput" type="double" initialValue="" verbalization="VatAmountOutput"/>
+  <variables name="TotalPremiumOutput" type="double" initialValue="" verbalization="TotalPremiumOutput"/>
+</ilog.rules.studio.model.base:VariableSet>

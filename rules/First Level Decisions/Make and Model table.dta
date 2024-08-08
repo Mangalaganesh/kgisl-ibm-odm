@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.dt:DecisionTable xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.dt="http://ilog.rules.studio/model/dt.ecore">
+  <name>Make and Model table</name>
+  <uuid>22b0b64b-5477-4e37-95f9-0b8e8cdb68e1</uuid>
+  <locale>en_US</locale>
+  <definition>
+<DT xmlns="http://schemas.ilog.com/Rules/7.0/DecisionTable" Version="7.0">
+  <Body xmlns="http://schemas.ilog.com/Rules/7.0/DecisionTable">
+                <Properties>
+                    <Property Name="UI.MediaType"><![CDATA[Web]]></Property>
+                    <Property Name="RowOrdering"><![CDATA[Manual]]></Property>
+                </Properties>
+                <Structure>
+                    <ConditionDefinitions>
+                        <ConditionDefinition Id="C0">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[the make of the make model of TariffInput is one of <make enums> ]]></Text>
+                            </ExpressionDefinition>
+                        </ConditionDefinition>
+                        <ConditionDefinition Id="C1">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[the model of the make model of TariffInput is one of <model enums> ]]></Text>
+                            </ExpressionDefinition>
+                        </ConditionDefinition>
+                    </ConditionDefinitions>
+                    <ActionDefinitions>
+                        <ActionDefinition Id="A0">
+                            <ExpressionDefinition>
+                                <Text><![CDATA[set MakeModelResult to <a number> ]]></Text>
+                            </ExpressionDefinition>
+                        </ActionDefinition>
+                    </ActionDefinitions>
+                </Structure>
+                <Contents>
+                    <Partition DefId="C0">
+                        <Condition>
+                            <Expression>
+                                <Param><![CDATA[{ CHEVROLET , FORD , HAVAL , HONDA , HYUNDAI , ISUZU , MAZDA , MG , MINI , MITSUBISHI , NISSAN , SUBARU , SUZUKI , TOYOTA , TR , VOLKSWAGEN , VOLVO }]]></Param>
+                            </Expression>
+                            <Partition DefId="C1">
+                                <Condition>
+                                    <Expression>
+                                        <Param><![CDATA[{ ALPHARD , BEETLE , BR_V , CAPTIVA , COOPER , COROLLA_CROSS , CR_V , CX_3 , CX_30 , CX_5 , CX_8 , C_HR , ECOSPORT , ESCAPE , ESQUIRE , ESTIMA , EVEREST , FORTUNER , FREED , GRAND_STAREX , GS , H6 , HARRIER , HS , HS_PHEV , H_1 , IMPREZA , JOLION , JUKE , KICKS , LANDCRUISER_PRADO , LEGACY , LIVINA , MU_7 , MU_X , ONE , OUTBACK , OUTLANDER , PAJERO_SPORT , S60 , S80 , S90 , TERRA , TRANSFORMER , TRANSFORMER_LL , TUCSON , V40 , V90 , VELLFIRE , VELOSTER , VELOZ , VENTURY , VOXY , XC40 , XC60 , XC90 , XL7 , XPANDER , X_TRAIL , ZS }]]></Param>
+                                    </Expression>
+                                    <ActionSet>
+                                        <Action DefId="A0">
+                                            <Expression>
+                                                <Param><![CDATA[5]]></Param>
+                                            </Expression>
+                                        </Action>
+                                    </ActionSet>
+                                </Condition>
+                            </Partition>
+                        </Condition>
+                        <Condition>
+                            <Expression>
+                                <Param><![CDATA[{ FORD }]]></Param>
+                            </Expression>
+                            <Partition DefId="C1">
+                                <Condition>
+                                    <Expression>
+                                        <Param><![CDATA[{ FIESTA }]]></Param>
+                                    </Expression>
+                                    <ActionSet>
+                                        <Action DefId="A0">
+                                            <Expression>
+                                                <Param><![CDATA[3]]></Param>
+                                            </Expression>
+                                        </Action>
+                                    </ActionSet>
+                                </Condition>
+                            </Partition>
+                        </Condition>
+                    </Partition>
+                </Contents>
+            </Body>
+  <Resources DefaultLocale="en_US" xmlns="http://schemas.ilog.com/Rules/7.0/DecisionTable">
+                <ResourceSet Locale="en_US">
+                    <Data Name="Definitions(C0)#HeaderText"><![CDATA[Make]]></Data>
+                    <Data Name="Definitions(C1)#HeaderText"><![CDATA[Model]]></Data>
+                    <Data Name="Definitions(C0)[0]#HeaderText"><![CDATA[a make enum]]></Data>
+                    <Data Name="Definitions(A0)#HeaderText"><![CDATA[Rate]]></Data>
+                    <Data Name="Definitions(C1)[0]#HeaderText"><![CDATA[an object]]></Data>
+                </ResourceSet>
+            </Resources>
+</DT>
+</definition>
+</ilog.rules.studio.model.dt:DecisionTable>

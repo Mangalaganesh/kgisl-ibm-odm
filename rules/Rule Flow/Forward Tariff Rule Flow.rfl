@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.ruleflow:RuleFlow xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.ruleflow="http://ilog.rules.studio/model/ruleflow.ecore">
+  <name>Forward Tariff Rule Flow</name>
+  <uuid>c6fddc11-a3dd-4495-94f9-452f80d3f5f4</uuid>
+  <locale>en_US</locale>
+  <categories>any</categories>
+  <rfModel>
+<Ruleflow xmlns="http://schemas.ilog.com/Rules/7.0/Ruleflow">
+  <Body>
+    <TaskList>
+      <StartTask Identifier="task_1"/>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_0" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="5068d18c-c94e-4b91-ae77-d07e41f3764f"/>
+          <Rule Uuid="3915eed3-730a-411f-9c11-a76c187a4354"/>
+          <Rule Uuid="7f0416ac-e277-479d-824f-711bf4ab0892"/>
+          <Rule Uuid="0f13d7c4-dd8e-462c-ba94-2454639b5aea"/>
+          <Rule Uuid="821487a3-12ac-4835-83a4-a0db4f2bd4ba"/>
+          <Rule Uuid="843f7baf-ed5a-478b-b527-cc308feb6459"/>
+          <Rule Uuid="8b3af337-af6a-45ad-a3f3-fd94ba7fbe5b"/>
+          <Rule Uuid="e43987e5-b69b-4bee-b85e-e2cf8d0b16ee"/>
+          <Rule Uuid="a4ce1d44-139c-41f1-a9d3-342a56913f23"/>
+          <Rule Uuid="76ebc688-7647-43ab-a95e-07952de32dbf"/>
+          <Rule Uuid="dec89179-934a-4950-82c8-4e5469c7ea0e"/>
+          <Rule Uuid="cb95437d-fb1d-4a91-8344-fa35d49f7129"/>
+          <Rule Uuid="f85f7edd-d177-4cf6-86c5-b75f6bd13d8f"/>
+          <Rule Uuid="dac0193b-711f-4aed-bad5-de2209fc3549"/>
+          <Rule Uuid="7b343e98-4b56-4e94-99bb-6b4e27952786"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_1" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="5e294868-e159-4e81-bb4d-66b292001170"/>
+          <Rule Uuid="85f60124-828b-4351-bafa-5d64049dd9ca"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_2" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="a85eac60-e498-49f6-bec0-4367c62d11eb"/>
+          <Rule Uuid="0614e6ac-df18-49a3-89ce-78773df44354"/>
+          <Rule Uuid="292e4f5a-adeb-41e6-b714-faa724d17c33"/>
+          <Rule Uuid="09c20b8e-7931-4614-8e70-5d2555cf8c89"/>
+        </RuleList>
+      </RuleTask>
+      <ActionTask Identifier="function_0">
+        <Actions Language="bal"><![CDATA[set UsageOutput to rounding utils.roundToDecimalPlaces ( ( BaseRateResult * ( UsageResult / 100 ) ) , 6 ) ;
+    set CapacityOutput to rounding utils.roundToDecimalPlaces ( ( UsageOutput * ( CapacityResult / 100 ) ) , 6 ) ;
+    set DriverAgeOutput to rounding utils.roundToDecimalPlaces ( ( CapacityOutput * ( DriverAgeResult / 100 ) ) , 6 ) ;
+    set CarAgeOutput to rounding utils.roundToDecimalPlaces ( ( DriverAgeOutput * ( CarAgeResult / 100 ) ) , 6 ) ;
+    set SumInsuredOutput to rounding utils.roundToDecimalPlaces ( ( CarAgeOutput * ( SumInsuredResult / 100 ) ) , 6 ) ;
+    set CarGroupOutput to rounding utils.roundToDecimalPlaces ( ( SumInsuredOutput * ( CarGroupResult / 100 ) ) , 6 ) ;
+    set TPBiPersonOutput to rounding utils.roundToDecimalPlaces ( ( CarGroupOutput * TPBIPersonResult ) , 6 ) ;
+    set TPBiAccidentOutput to rounding utils.roundToDecimalPlaces ( ( TPBiPersonOutput * BIAccidentResult ) , 6 ) ;
+    set TPPropAccidentOutput to rounding utils.roundToDecimalPlaces ( ( TPBiAccidentOutput * TPPropertyResult ) , 6 ) ;
+    set TotalPremiumOutput to TotalPremiumResult;]]></Actions>
+      </ActionTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_4" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="9b2e35b6-57c3-40e2-8478-35087dacb15a"/>
+        </RuleList>
+      </RuleTask>
+      <ActionTask Identifier="function_1">
+        <Actions Language="bal"><![CDATA[set the fleet percent of the discount of TariffInput to ((AfterDeductibleOutput - ReverseBeforeFleet ) / AfterDeductibleOutput) * 100;]]></Actions>
+      </ActionTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_3" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="7d36d65c-c752-4393-8520-1a84ff569f18"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_5" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="0ae33a5f-0701-4827-94ab-82179f506419"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_6" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="20b7a0e3-8211-46ae-a4da-b92b65f0de93"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_7" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="22def099-e687-46a9-add8-0ec89dc21965"/>
+          <Rule Uuid="093dfd65-0549-477e-8854-f0d31b6229cc"/>
+        </RuleList>
+      </RuleTask>
+      <ActionTask Identifier="function_2">
+        <Actions Language="bal"><![CDATA[set FleetDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterDeductibleOutput * ( FleetPercentResult / 100 ) ) , 6 ) ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_3">
+        <Actions Language="bal"><![CDATA[set the direct percent of the discount of TariffInput to ( ( AfterNcbDiscountOutput - ReverseBeforeDirectDisc ) / AfterNcbDiscountOutput ) * 100 ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_4">
+        <Actions Language="bal"><![CDATA[set the red plate percent of the discount of TariffInput to ((AfterDirectDiscountOutput - ReverseBeforeRedPlate ) / AfterDirectDiscountOutput) * 100;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_5">
+        <Actions Language="bal"><![CDATA[set the cctv percent of the discount of TariffInput to ( ( AfterRedPlateDiscountOutput - ReverseBeforeCctvDiscount ) / AfterRedPlateDiscountOutput ) * 100 ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_7">
+        <Actions Language="bal"><![CDATA[set the ncb percent of the discount of TariffInput to ( ( AfterFleetDiscountOutput - ReverseBeforeNcb ) / AfterFleetDiscountOutput ) * 100 ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_8">
+        <Actions Language="bal"><![CDATA[set NcbDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterFleetDiscountOutput * ( NCBDiscountResult / 100 ) ) , 6 ) ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_9">
+        <Actions Language="bal"><![CDATA[set DirectDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterNcbDiscountOutput * ( DirectDiscountResult / 100 ) )  , 6 ) ;
+    set AfterDirectDiscountOutput to rounding utils.roundToDecimalPlaces ( AfterNcbDiscountOutput - DirectDiscountOutput , 6 ) ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_10">
+        <Actions Language="bal"><![CDATA[set RedPlateDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterDirectDiscountOutput * ( RedPlateDiscountResult / 100 ) ) , 6 ) ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_11">
+        <Actions Language="bal"><![CDATA[set CctvDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterRedPlateDiscountOutput * ( the cctv percent of the discount of TariffInput / 100 ) ) , 2 ) ;
+    set AfterCctvDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterRedPlateDiscountOutput - CctvDiscountOutput ) , 0 ) ;
+    set AnnualPremiumOutput to AfterCctvDiscountOutput ;
+    set GrossPremiumOutput to AnnualPremiumOutput ;
+    set TotalPremiumBeforTaxResult to GrossPremiumOutput ;
+    set StampDutyOutput to rounding utils.roundToDecimalPlaces ( ( GrossPremiumOutput * ( StampDuty / 100 ) ) , 2 ) ;
+    set PremiumBeforeVatOutput to rounding utils.roundToDecimalPlaces ( ( GrossPremiumOutput + StampDutyOutput ) , 2 ) ;
+    set PremiumBeforeVatOutput to rounding utils.roundToDecimalPlaces ( ( GrossPremiumOutput + StampDutyOutput ) , 2 ) ;
+    set VatAmountOutput to rounding utils.roundToDecimalPlaces ( ( PremiumBeforeVatOutput * ( Vat / 100 ) ) , 2 ) ;
+    set TotalPremiumOutput to rounding utils.roundToDecimalPlaces ( ( PremiumBeforeVatOutput + VatAmountOutput ) , 2 ) ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_6">
+        <Actions Language="bal"><![CDATA[set PaDriverAmountOutput to rounding utils.roundToDecimalPlaces( ( DriverPassengerSiResult * ( DriverCoverResult / 100 ) ) ,  6 ) ;
+   set AfterDriverAmoutOutput to rounding utils.roundToDecimalPlaces( ( TPPropAccidentOutput + PaDriverAmountOutput ) , 6 ) ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_12">
+        <Actions Language="bal"><![CDATA[set DriverCoverResult to driver and passenger perc.findDriverPercentage ( ReversePaDriverAmountOutput , TPPropAccidentOutput , DriverCoverResult );]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_13">
+        <Actions Language="bal"><![CDATA[set DriverCoverResult to ( ( ( ReversePaDriverAmountOutput - TPPropAccidentOutput ) / 100 ) / 1000 ) * 100 ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_14">
+        <Actions Language="bal"><![CDATA[set PassengerCoverResult to ( ( (ReversePaPassengerAmountOutput - AfterDriverAmoutOutput ) / 100 ) / 1000 ) / ( the seats of TariffInput - 1 ) * 100  ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_15">
+        <Actions Language="bal"><![CDATA[set PaDriverAmountOutput to rounding utils.roundToDecimalPlaces ( ( DriverPassengerSiResult * ( DriverCoverResult / 100 ) )  , 6 ) ;
+    set AfterDriverAmoutOutput to rounding utils.roundToDecimalPlaces ( ( TPPropAccidentOutput + PaDriverAmountOutput ) , 6 ) ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_16">
+        <Actions Language="bal"><![CDATA[set PassengerCoverResult to driver and passenger perc.findPassengerPercentage ( ReversePaPassengerAmountOutput , AfterDriverAmoutOutput , PassengerCoverResult ) ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_17">
+        <Actions Language="bal"><![CDATA[set PaPassengerAmountOutput to rounding utils.roundToDecimalPlaces ( ( DriverPassengerSiResult * ( PassengerCoverResult / 100 ) * ( the seats of TariffInput - 1 ) ) , 6 ) ;
+    set AfterPassengerAmountOutput to rounding utils.roundToDecimalPlaces ( ( AfterDriverAmoutOutput + PaPassengerAmountOutput ) , 6 ) ;
+    set PaMedicalExpenseOutput to rounding utils.roundToDecimalPlaces ( ( MedicalExpenseResult * the seats of TariffInput ) , 6 ) ;
+    set AfterMedicalExpenseOutput to rounding utils.roundToDecimalPlaces ( ( AfterPassengerAmountOutput + PaMedicalExpenseOutput ) , 6 ) ;
+    set PaBailBondOutput to rounding utils.roundToDecimalPlaces ( ( BailBondSiResult * ( BailBondResult / 100 ) ) , 6 ) ;
+    set AfterBailBondOutput to rounding utils.roundToDecimalPlaces ( ( AfterMedicalExpenseOutput + PaBailBondOutput ) , 6 ) ;
+    set PaSumAmountOutput to rounding utils.roundToDecimalPlaces ( ( PaDriverAmountOutput + PaPassengerAmountOutput + PaMedicalExpenseOutput + PaBailBondOutput ) , 6 ) ;
+    set AfterPaAmountOutput to rounding utils.roundToDecimalPlaces ( ( TPPropAccidentOutput + PaSumAmountOutput ) , 6 ) ;
+    set AfterDeductibleOutput to rounding utils.roundToDecimalPlaces ( ( AfterPaAmountOutput - DeductibleResult ) , 6 ) ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_18">
+        <Actions Language="bal"><![CDATA[set AfterFleetDiscountOutput to rounding utils.roundToDecimalPlaces ( AfterDeductibleOutput - FleetDiscountOutput , 6 ) ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_20">
+        <Actions Language="bal"><![CDATA[set AfterNcbDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterFleetDiscountOutput - NcbDiscountOutput ) , 6 ) ;]]></Actions>
+      </ActionTask>
+      <ActionTask Identifier="function_24">
+        <Actions Language="bal"><![CDATA[set AfterRedPlateDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterDirectDiscountOutput - RedPlateDiscountOutput ) , 6 ) ;]]></Actions>
+      </ActionTask>
+      <SubflowTask Identifier="subflow_0" Uuid="d6fc5c5e-af24-49d3-9914-4342fd34cffc"/>
+      <SubflowTask Identifier="Calculation basis" Uuid="d6e80638-b30d-4aba-9e66-0e08c49b7e96"/>
+      <SubflowTask Identifier="subflow_1" Uuid="22753407-b39e-49f8-bb49-605ef75208a6"/>
+      <SubflowTask Identifier="subflow_3" Uuid="cf887801-5fbf-4b5c-8127-225d56526200"/>
+      <ActionTask Identifier="task_0">
+        <Actions Language="bal"><![CDATA[set AfterCctvDiscountOutput to rounding utils.roundToDecimalPlaces ( ( AfterRedPlateDiscountOutput - CctvDiscountOutput ) , 0 ) ;
+
+    set AnnualPremiumOutput to AfterCctvDiscountOutput ;
+
+    set GrossPremiumOutput to AnnualPremiumOutput ;
+
+    set TotalPremiumBeforTaxResult to GrossPremiumOutput ;
+
+    set StampDutyOutput to rounding utils.roundToDecimalPlaces ( ( GrossPremiumOutput * ( StampDuty / 100 ) ) , 2 ) ;
+
+    set PremiumBeforeVatOutput to rounding utils.roundToDecimalPlaces ( ( GrossPremiumOutput + StampDutyOutput ) , 2 ) ;
+
+    set PremiumBeforeVatOutput to rounding utils.roundToDecimalPlaces ( ( GrossPremiumOutput + StampDutyOutput ) , 2 ) ;
+
+    set VatAmountOutput to rounding utils.roundToDecimalPlaces ( ( PremiumBeforeVatOutput * ( Vat / 100 ) ) , 2 ) ;]]></Actions>
+      </ActionTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_3" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="093dfd65-0549-477e-8854-f0d31b6229cc"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="Fwd_FTP" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="81f23e14-d250-4e8c-8daf-317eb4b9bdf3"/>
+        </RuleList>
+      </RuleTask>
+      <StopTask Identifier="task_2"/>
+    </TaskList>
+    <NodeList>
+      <TaskNode Identifier="node_0" Task="task_1"/>
+      <TaskNode Identifier="node_1" Task="task_2"/>
+      <TaskNode Identifier="node_2" Task="rule_0"/>
+      <TaskNode Identifier="node_3" Task="rule_1"/>
+      <TaskNode Identifier="node_4" Task="rule_2"/>
+      <TaskNode Identifier="node_5" Task="function_0"/>
+      <TaskNode Identifier="node_7" Task="rule_4"/>
+      <TaskNode Identifier="node_6" Task="function_1"/>
+      <TaskNode Identifier="node_8" Task="rule_3"/>
+      <TaskNode Identifier="node_9" Task="rule_5"/>
+      <TaskNode Identifier="node_10" Task="rule_6"/>
+      <TaskNode Identifier="node_11" Task="rule_7"/>
+      <TaskNode Identifier="node_12" Task="function_2"/>
+      <TaskNode Identifier="node_13" Task="function_3"/>
+      <TaskNode Identifier="node_14" Task="function_4"/>
+      <TaskNode Identifier="node_15" Task="function_5"/>
+      <TaskNode Identifier="node_17" Task="function_7"/>
+      <TaskNode Identifier="node_18" Task="function_8"/>
+      <TaskNode Identifier="node_19" Task="function_9"/>
+      <TaskNode Identifier="node_20" Task="function_10"/>
+      <TaskNode Identifier="node_21" Task="function_11"/>
+      <TaskNode Identifier="node_16" Task="function_6"/>
+      <TaskNode Identifier="node_22" Task="function_12"/>
+      <TaskNode Identifier="node_23" Task="function_13"/>
+      <TaskNode Identifier="node_24" Task="function_14"/>
+      <TaskNode Identifier="node_25" Task="function_15"/>
+      <TaskNode Identifier="node_26" Task="function_16"/>
+      <TaskNode Identifier="node_27" Task="function_17"/>
+      <TaskNode Identifier="node_28" Task="function_18"/>
+      <TaskNode Identifier="node_30" Task="function_20"/>
+      <TaskNode Identifier="node_34" Task="function_24"/>
+      <TaskNode Identifier="node_29" Task="subflow_0"/>
+      <TaskNode Identifier="node_33" Task="Calculation basis"/>
+      <BranchNode Identifier="node_31"/>
+      <TaskNode Identifier="node_32" Task="subflow_1"/>
+      <TaskNode Identifier="node_36" Task="subflow_3"/>
+      <BranchNode Identifier="node_35"/>
+      <TaskNode Identifier="node_37" Task="task_0"/>
+      <TaskNode Identifier="node_38" Task="task_3"/>
+      <TaskNode Identifier="node_39" Task="Fwd_FTP"/>
+    </NodeList>
+    <TransitionList>
+      <Transition Identifier="transition_0" Source="node_0" Target="node_2"/>
+      <Transition Identifier="transition_1" Source="node_2" Target="node_3"/>
+      <Transition Identifier="transition_2" Source="node_3" Target="node_4"/>
+      <Transition Identifier="transition_7" Source="node_6" Target="node_7"/>
+      <Transition Identifier="transition_12" Source="node_7" Target="node_12"/>
+      <Transition Identifier="transition_15" Source="node_13" Target="node_9"/>
+      <Transition Identifier="transition_17" Source="node_14" Target="node_10"/>
+      <Transition Identifier="transition_19" Source="node_15" Target="node_11"/>
+      <Transition Identifier="transition_21" Source="node_17" Target="node_8"/>
+      <Transition Identifier="transition_13" Source="node_8" Target="node_18"/>
+      <Transition Identifier="transition_14" Source="node_9" Target="node_19"/>
+      <Transition Identifier="transition_23" Source="node_19" Target="node_14">
+        <Conditions Language="bal"><![CDATA[ReverseIncrementor equals 6]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_4" Source="node_19" Target="node_10"/>
+      <Transition Identifier="transition_16" Source="node_10" Target="node_20"/>
+      <Transition Identifier="transition_24" Source="node_20" Target="node_15">
+        <Conditions Language="bal"><![CDATA[ReverseIncrementor equals 7]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_25" Source="node_11" Target="node_35"/>
+      <Transition Identifier="transition_27" Source="node_22" Target="node_16"/>
+      <Transition Identifier="transition_20" Source="node_5" Target="node_23">
+        <Conditions Language="bal"><![CDATA[ReverseTotalPremiumOutput does not equal 0
+and the channel of TariffInput is not BANCA
+and ReverseIncrementor equals 1]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_28" Source="node_23" Target="node_22"/>
+      <Transition Identifier="transition_6" Source="node_5" Target="node_16"/>
+      <Transition Identifier="transition_26" Source="node_16" Target="node_25">
+        <Conditions Language="bal"><![CDATA[ReverseTotalPremiumOutput does not equal 0
+and the channel of TariffInput is not BANCA
+and ReverseIncrementor equals 2]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_30" Source="node_25" Target="node_24"/>
+      <Transition Identifier="transition_11" Source="node_24" Target="node_26"/>
+      <Transition Identifier="transition_29" Source="node_26" Target="node_27"/>
+      <Transition Identifier="transition_32" Source="node_27" Target="node_6">
+        <Conditions Language="bal"><![CDATA[ReverseIncrementor equals 3]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_31" Source="node_16" Target="node_27"/>
+      <Transition Identifier="transition_33" Source="node_27" Target="node_7"/>
+      <Transition Identifier="transition_34" Source="node_12" Target="node_28">
+        <Conditions Language="bal"><![CDATA[ReverseIncrementor equals 4]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_35" Source="node_28" Target="node_17"/>
+      <Transition Identifier="transition_37" Source="node_18" Target="node_30">
+        <Conditions Language="bal"><![CDATA[ReverseIncrementor equals 5]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_38" Source="node_30" Target="node_13"/>
+      <Transition Identifier="transition_8" Source="node_12" Target="node_8"/>
+      <Transition Identifier="transition_10" Source="node_18" Target="node_9"/>
+      <Transition Identifier="transition_43" Source="node_20" Target="node_34"/>
+      <Transition Identifier="transition_44" Source="node_34" Target="node_11"/>
+      <Transition Identifier="transition_9" Source="node_21" Target="node_33"/>
+      <Transition Identifier="transition_18" Source="node_29" Target="node_1"/>
+      <Transition Identifier="transition_22" Source="node_33" Target="node_29"/>
+      <Transition Identifier="transition_3" Source="node_31" Target="node_32">
+        <Conditions Language="bal"><![CDATA[planCode  is "MPC_CM"]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_39" Source="node_32" Target="node_5"/>
+      <Transition Identifier="transition_36" Source="node_31" Target="node_36">
+        <Conditions Language="bal"><![CDATA[(planCode is not null and planCode is "MPC_VM")]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_40" Source="node_36" Target="node_5"/>
+      <Transition Identifier="transition_41" Source="node_31" Target="node_5"/>
+      <Transition Identifier="transition_42" Source="node_35" Target="node_21"/>
+      <Transition Identifier="transition_45" Source="node_35" Target="node_37">
+        <Conditions Language="bal"><![CDATA[planCode is "MPC_CM"]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_46" Source="node_37" Target="node_33"/>
+      <Transition Identifier="transition_47" Source="node_36" Target="node_38">
+        <Conditions Language="bal"><![CDATA[true]]></Conditions>
+      </Transition>
+      <Transition Identifier="transition_48" Source="node_38" Target="node_29"/>
+      <Transition Identifier="transition_49" Source="node_4" Target="node_39"/>
+      <Transition Identifier="transition_50" Source="node_39" Target="node_31"/>
+      <Transition Identifier="transition_5" Source="node_3" Target="node_39">
+        <Conditions Language="bal"><![CDATA[planCode is "MPC_CM"]]></Conditions>
+      </Transition>
+    </TransitionList>
+  </Body>
+  <Resources>
+    <ResourceSet Locale="en_US">
+      <Data Name="node_14#name">node_14</Data>
+      <Data Name="node_30#label">Action Task</Data>
+      <Data Name="node_9#x">198.82564</Data>
+      <Data Name="node_9#y">2331.776</Data>
+      <Data Name="node_10#label">Red Plate Discount</Data>
+      <Data Name="node_31#name">node_31</Data>
+      <Data Name="node_20#label">Action Task</Data>
+      <Data Name="transition_20#label">Channel and Reverse incrementor check for Reverse calculation</Data>
+      <Data Name="node_6#label">Action Task</Data>
+      <Data Name="node_28#name">node_28</Data>
+      <Data Name="node_12#y">1771.7759</Data>
+      <Data Name="node_29#name">node_29</Data>
+      <Data Name="node_35#y">2891.776</Data>
+      <Data Name="node_30#name">node_30</Data>
+      <Data Name="node_35#x">116.698044</Data>
+      <Data Name="node_3#label">Second Level</Data>
+      <Data Name="node_16#x">62.239616</Data>
+      <Data Name="node_31#y">781.7759</Data>
+      <Data Name="transition_23#label">Reverse Incrementor is 6</Data>
+      <Data Name="node_31#x">202.56635</Data>
+      <Data Name="node_12#x">196.76753</Data>
+      <Data Name="node_5#x">72.10304</Data>
+      <Data Name="node_5#y">971.7759</Data>
+      <Data Name="node_16#y">1211.7759</Data>
+      <Data Name="node_39#y">701.7759</Data>
+      <Data Name="node_1#x">257.77216</Data>
+      <Data Name="node_8#name">node_8</Data>
+      <Data Name="node_39#x">166.1114</Data>
+      <Data Name="node_1#y">3211.776</Data>
+      <Data Name="transition_36#label">MPC_VM</Data>
+      <Data Name="node_13#label">Action Task</Data>
+      <Data Name="node_15#name">node_15</Data>
+      <Data Name="node_28#label">Action Task</Data>
+      <Data Name="node_7#name">node_7</Data>
+      <Data Name="node_24#x">108.53542</Data>
+      <Data Name="node_24#y">1371.7759</Data>
+      <Data Name="node_12#name">node_12</Data>
+      <Data Name="node_20#x">105.19942</Data>
+      <Data Name="node_39#label">Fixed Total Premium</Data>
+      <Data Name="node_20#y">2651.776</Data>
+      <Data Name="node_9#label">Direct Discount</Data>
+      <Data Name="node_16#label">Driver Percent</Data>
+      <Data Name="node_28#y">1851.7759</Data>
+      <Data Name="node_36#label">voluntary calc</Data>
+      <Data Name="node_28#x">239.33107</Data>
+      <Data Name="node_17#name">node_17</Data>
+      <Data Name="node_5#name">node_5</Data>
+      <Data Name="node_19#label">Action Task</Data>
+      <Data Name="node_34#name">node_34</Data>
+      <Data Name="node_30#x">248.86134</Data>
+      <Data Name="node_29#label">Subflow Task</Data>
+      <Data Name="node_39#name">node_39</Data>
+      <Data Name="node_34#y">2731.776</Data>
+      <Data Name="node_15#x">194.51877</Data>
+      <Data Name="node_33#name">node_33</Data>
+      <Data Name="node_38#x">320.94727</Data>
+      <Data Name="node_15#y">2731.776</Data>
+      <Data Name="node_18#name">node_18</Data>
+      <Data Name="node_30#y">2171.776</Data>
+      <Data Name="node_11#x">102.73155</Data>
+      <Data Name="node_34#x">20.518763</Data>
+      <Data Name="node_11#y">2811.776</Data>
+      <Data Name="node_8#label">NCB Discount</Data>
+      <Data Name="node_6#x">140.78207</Data>
+      <Data Name="node_6#y">1611.7759</Data>
+      <Data Name="node_11#name">node_11</Data>
+      <Data Name="node_12#label">Action Task</Data>
+      <Data Name="node_22#label">Find Driver Cover Result</Data>
+      <Data Name="node_38#y">2811.776</Data>
+      <Data Name="node_2#x">49.079117</Data>
+      <Data Name="node_19#x">174.1515</Data>
+      <Data Name="node_2#y">541.7759</Data>
+      <Data Name="node_19#y">2411.776</Data>
+      <Data Name="node_21#name">node_21</Data>
+      <Data Name="node_11#label">CCTV Discount</Data>
+      <Data Name="node_18#label">Action Task</Data>
+      <Data Name="node_7#label">Fleet Discount</Data>
+      <Data Name="transition_34#label">Reverse Incrementor is 4</Data>
+      <Data Name="node_34#label">Action Task</Data>
+      <Data Name="node_23#y">1051.7759</Data>
+      <Data Name="node_27#x">57.483727</Data>
+      <Data Name="node_23#label">Calculate Driver Perc</Data>
+      <Data Name="transition_5#label">PlanCode</Data>
+      <Data Name="node_23#x">101.95224</Data>
+      <Data Name="node_24#name">node_24</Data>
+      <Data Name="node_27#name">node_27</Data>
+      <Data Name="node_27#y">1531.7759</Data>
+      <Data Name="node_4#width">102.0</Data>
+      <Data Name="node_27#label">Passenger Percent</Data>
+      <Data Name="node_37#label">MPC_CM</Data>
+      <Data Name="node_4#height">53.402344</Data>
+      <Data Name="node_7#y">1691.7759</Data>
+      <Data Name="node_17#label">Action Task</Data>
+      <Data Name="node_2#name">node_2</Data>
+      <Data Name="node_36#name">node_36</Data>
+      <Data Name="node_23#name">node_23</Data>
+      <Data Name="node_14#label">Action Task</Data>
+      <Data Name="node_14#x">239.12566</Data>
+      <Data Name="node_14#y">2491.776</Data>
+      <Data Name="node_37#y">2971.776</Data>
+      <Data Name="node_37#x">-9.317017</Data>
+      <Data Name="node_10#x">159.3177</Data>
+      <Data Name="node_10#y">2571.776</Data>
+      <Data Name="node_33#y">3051.776</Data>
+      <Data Name="node_33#x">64.741325</Data>
+      <Data Name="node_3#y">621.7759</Data>
+      <Data Name="node_22#name">node_22</Data>
+      <Data Name="node_37#name">node_37</Data>
+      <Data Name="node_7#x">94.08214</Data>
+      <Data Name="node_18#x">188.49336</Data>
+      <Data Name="node_18#y">2091.776</Data>
+      <Data Name="node_3#x">49.07912</Data>
+      <Data Name="node_21#label">Action Task</Data>
+      <Data Name="node_1#name">node_1</Data>
+      <Data Name="node_2#label">First Level</Data>
+      <Data Name="node_5#label">Action Task</Data>
+      <Data Name="node_4#name">node_4</Data>
+      <Data Name="node_24#label">Calculate Passenger Percent</Data>
+      <Data Name="node_26#y">1451.7759</Data>
+      <Data Name="node_26#x">107.44193</Data>
+      <Data Name="transition_24#label">Reverse Incrementor is 7</Data>
+      <Data Name="node_22#x">90.87401</Data>
+      <Data Name="node_22#y">1131.7759</Data>
+      <Data Name="transition_32#label">Reverse Incrementor is 3</Data>
+      <Data Name="node_8#x">193.74736</Data>
+      <Data Name="node_8#y">2011.7759</Data>
+      <Data Name="transition_3#label">PLAN Code Check</Data>
+      <Data Name="node_25#name">node_25</Data>
+      <Data Name="node_20#name">node_20</Data>
+      <Data Name="node_13#x">248.86134</Data>
+      <Data Name="node_36#x">112.31713</Data>
+      <Data Name="node_13#y">2251.776</Data>
+      <Data Name="node_26#name">node_26</Data>
+      <Data Name="node_36#y">876.7759</Data>
+      <Data Name="node_32#x">292.30737</Data>
+      <Data Name="node_15#label">Action Task</Data>
+      <Data Name="node_25#label">Action Task</Data>
+      <Data Name="node_32#y">876.7759</Data>
+      <Data Name="node_4#x">-8.888607</Data>
+      <Data Name="node_4#y">702.7759</Data>
+      <Data Name="node_32#label">Calc Compulsary SubFlow</Data>
+      <Data Name="node_0#x">99.07912</Data>
+      <Data Name="node_17#x">239.33107</Data>
+      <Data Name="node_0#y">471.77588</Data>
+      <Data Name="node_17#y">1931.7759</Data>
+      <Data Name="node_38#name">node_38</Data>
+      <Data Name="node_31#label">Condition</Data>
+      <Data Name="node_35#name">node_35</Data>
+      <Data Name="transition_26#label">Channel and Reverse incrementor check for Reverse calculation</Data>
+      <Data Name="node_38#label">CommissionTable</Data>
+      <Data Name="node_10#name">node_10</Data>
+      <Data Name="node_6#name">node_6</Data>
+      <Data Name="node_25#x">155.3196</Data>
+      <Data Name="node_9#name">node_9</Data>
+      <Data Name="node_0#name">node_0</Data>
+      <Data Name="node_4#label">Third Level</Data>
+      <Data Name="node_25#y">1291.7759</Data>
+      <Data Name="node_21#x">164.68298</Data>
+      <Data Name="node_21#y">2971.776</Data>
+      <Data Name="node_13#name">node_13</Data>
+      <Data Name="node_16#name">node_16</Data>
+      <Data Name="node_29#x">207.63649</Data>
+      <Data Name="node_19#name">node_19</Data>
+      <Data Name="node_32#name">node_32</Data>
+      <Data Name="transition_37#label">Reverse Incrementor is 5</Data>
+      <Data Name="node_3#name">node_3</Data>
+      <Data Name="node_26#label">Find Passenger Cover Result</Data>
+      <Data Name="node_29#y">3131.776</Data>
+    </ResourceSet>
+  </Resources>
+  <Properties>
+    <imports/>
+  </Properties>
+</Ruleflow>
+</rfModel>
+</ilog.rules.studio.model.ruleflow:RuleFlow>

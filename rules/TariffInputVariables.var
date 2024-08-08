@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>TariffInputVariables</name>
+  <uuid>c6883149-b7cd-4024-858b-aa9c67eab8b2</uuid>
+  <documentation><![CDATA[]]></documentation>
+  <variables name="TariffInput" type="main.tariffcalculation.TariffCalculationInputVariables" initialValue="" verbalization="TariffInput"/>
+  <variables name="EffectiveDate" type="java.util.Date" initialValue="" verbalization="EffectiveDate"/>
+</ilog.rules.studio.model.base:VariableSet>

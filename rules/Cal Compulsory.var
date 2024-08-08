@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>Cal Compulsory</name>
+  <uuid>73133616-d5f9-4b76-80c8-8ddea68a5721</uuid>
+  <documentation><![CDATA[]]></documentation>
+  <variables name="Make" type="main.tariffcalculation.MakeEnum" initialValue="" verbalization="Make"/>
+  <variables name="Model" type="main.tariffcalculation.ModelEnum" initialValue="" verbalization="Model"/>
+  <variables name="UsageCode" type="java.lang.String" initialValue="" verbalization="UsageCode"/>
+  <variables name="BasePremium" type="double" initialValue="" verbalization="BasePremium"/>
+  <variables name="policyPoc" type="double" initialValue="365" verbalization="policyPoc"/>
+  <variables name="yearDays" type="double" initialValue="365" verbalization="yearDays"/>
+  <variables name="ExpiryDate" type="java.util.Date" initialValue="" verbalization="ExpiryDate"/>
+  <variables name="CarCode" type="java.lang.String" initialValue="" verbalization="CarCode"/>
+  <variables name="CalculationBasis" type="java.lang.String" initialValue="" verbalization="CalculationBasis"/>
+  <variables name="dataLength" type="double" initialValue="" verbalization="dataLength"/>
+  <variables name="CalculationBasisRate" type="double" initialValue="" verbalization="CalculationBasisRate"/>
+  <variables name="vmValue" type="double" initialValue="1" verbalization="vmValue"/>
+  <variables name="tempStampDutyOutput" type="double" initialValue="" verbalization="tempStampDutyOutput"/>
+  <variables name="tempVatAmtOutput" type="double" initialValue="" verbalization="tempVatAmtOutput"/>
+  <variables name="tempTotalPremiumOutput" type="double" initialValue="" verbalization="tempTotalPremiumOutput"/>
+</ilog.rules.studio.model.base:VariableSet>

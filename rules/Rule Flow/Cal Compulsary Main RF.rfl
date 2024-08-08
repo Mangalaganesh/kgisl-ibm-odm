@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.ruleflow:RuleFlow xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.ruleflow="http://ilog.rules.studio/model/ruleflow.ecore">
+  <name>Cal Compulsary Main RF</name>
+  <uuid>22753407-b39e-49f8-bb49-605ef75208a6</uuid>
+  <locale>en_US</locale>
+  <categories>any</categories>
+  <rfModel>
+<Ruleflow xmlns="http://schemas.ilog.com/Rules/7.0/Ruleflow">
+  <Body>
+    <TaskList>
+      <StartTask Identifier="task_0"/>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="Make &amp; Model" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="22b0b64b-5477-4e37-95f9-0b8e8cdb68e1"/>
+          <Rule Uuid="8b981fb4-e66c-4f41-a43a-b5894d137089"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="Compulsory" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="a8e4e255-ace1-4ff6-a18d-2d0a90f4fe22"/>
+        </RuleList>
+      </RuleTask>
+      <ActionTask Identifier="Calculation">
+        <Actions Language="irl"><![CDATA[policyPoc = UtilDate.differenceBetweenTwoDates(EffectiveDate, ExpiryDate) - 1;
+
+yearDays = UtilDate.totalDaysInYear(ExpiryDate);
+
+if(policyPoc>90){
+BasePremium = BaseRateResult * (policyPoc/yearDays);
+
+TotalPremiumBeforTaxResult = BasePremium;
+
+StampDutyOutput =Utils.roundMax(BasePremium * (StampDuty / 100));
+tempStampDutyOutput = StampDutyOutput;
+
+VatAmountOutput = (BasePremium + StampDutyOutput) * ( Vat / 100);
+tempVatAmtOutput = VatAmountOutput;
+TotalPremiumOutput =BasePremium + StampDutyOutput + VatAmountOutput;
+tempTotalPremiumOutput = TotalPremiumOutput;
+
+}]]></Actions>
+      </ActionTask>
+      <StopTask Identifier="task_1"/>
+    </TaskList>
+    <NodeList>
+      <TaskNode Identifier="node_0" Task="task_0"/>
+      <TaskNode Identifier="node_1" Task="task_1"/>
+      <TaskNode Identifier="node_2" Task="Make &amp; Model"/>
+      <TaskNode Identifier="node_3" Task="Compulsory"/>
+      <TaskNode Identifier="node_4" Task="Calculation"/>
+    </NodeList>
+    <TransitionList>
+      <Transition Identifier="transition_0" Source="node_0" Target="node_2"/>
+      <Transition Identifier="transition_1" Source="node_2" Target="node_3"/>
+      <Transition Identifier="transition_2" Source="node_3" Target="node_4"/>
+      <Transition Identifier="transition_3" Source="node_4" Target="node_1"/>
+    </TransitionList>
+  </Body>
+  <Resources>
+    <ResourceSet Locale="en_US">
+      <Data Name="node_1#name">node_1</Data>
+      <Data Name="node_2#name">node_2</Data>
+      <Data Name="node_4#name">node_4</Data>
+      <Data Name="node_0#name">node_0</Data>
+      <Data Name="node_3#y">164.80118</Data>
+      <Data Name="node_4#x">37.900284</Data>
+      <Data Name="node_4#y">244.80118</Data>
+      <Data Name="node_0#x">87.90028</Data>
+      <Data Name="node_0#y">14.801178</Data>
+      <Data Name="node_1#x">87.90028</Data>
+      <Data Name="node_1#y">324.80118</Data>
+      <Data Name="node_2#x">37.461365</Data>
+      <Data Name="node_3#name">node_3</Data>
+      <Data Name="node_2#y">84.80118</Data>
+      <Data Name="node_3#x">37.900284</Data>
+    </ResourceSet>
+  </Resources>
+  <Properties>
+    <imports><![CDATA[use policyPoc;
+use BasePremium;
+use BaseRateResult;
+use yearDays;
+use StampDutyOutput;
+use StampDuty;
+use VatAmountOutput;
+use TotalPremiumOutput;
+use Vat;
+import main.tariffcalculation.Utils;
+import main.tariffcalculation.UtilDate;
+use EffectiveDate;
+use ExpiryDate;
+use tempStampDutyOutput;
+use tempVatAmtOutput;
+use tempTotalPremiumOutput;
+]]></imports>
+  </Properties>
+</Ruleflow>
+</rfModel>
+</ilog.rules.studio.model.ruleflow:RuleFlow>

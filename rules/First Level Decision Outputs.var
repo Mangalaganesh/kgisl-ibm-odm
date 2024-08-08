@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>First Level Decision Outputs</name>
+  <uuid>afdf4225-cc18-41e9-9051-e80a1968e4b8</uuid>
+  <documentation><![CDATA[]]></documentation>
+  <variables name="DriverAgeResult" type="double" initialValue="" verbalization="DriverAgeResult"/>
+  <variables name="CarAgeResult" type="double" initialValue="" verbalization="CarAgeResult"/>
+  <variables name="CapacityResult" type="double" initialValue="" verbalization="CapacityResult"/>
+  <variables name="NCBRenewalResult" type="java.util.LinkedList" initialValue="" verbalization="NCBRenewalResult"/>
+  <variables name="MakeModelResult" type="double" initialValue="" verbalization="MakeModelResult"/>
+  <variables name="BasePremiumResult" type="main.tariffcalculation.MinAndMax" initialValue="" verbalization="BasePremiumResult"/>
+  <variables name="PADriverRangeResult" type="main.tariffcalculation.MinAndMax" initialValue="" verbalization="PADriverRangeResult"/>
+  <variables name="PAPassengerRangeResult" type="main.tariffcalculation.MinAndMax" initialValue="" verbalization="PAPassengerRangeResult"/>
+  <variables name="DriverCoverResult" type="double" initialValue="" verbalization="DriverCoverResult"/>
+  <variables name="DeductibleResult" type="double" initialValue="" verbalization="DeductibleResult"/>
+  <variables name="PassengerCoverResult" type="double" initialValue="" verbalization="PassengerCoverResult"/>
+  <variables name="BailBondResult" type="double" initialValue="" verbalization="BailBondResult"/>
+  <variables name="SumInsuredResult" type="double" initialValue="" verbalization="SumInsuredResult"/>
+  <variables name="UsageResult" type="double" initialValue="" verbalization="UsageResult"/>
+  <variables name="BaseRateResult" type="double" initialValue="" verbalization="BaseRateResult"/>
+  <variables name="driverCoverage" type="double" initialValue="" verbalization="driverCoverage"/>
+  <variables name="passengerCoverage" type="double" initialValue="" verbalization="passengerCoverage"/>
+</ilog.rules.studio.model.base:VariableSet>

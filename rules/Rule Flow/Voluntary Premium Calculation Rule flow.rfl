@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.ruleflow:RuleFlow xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.ruleflow="http://ilog.rules.studio/model/ruleflow.ecore">
+  <name>Voluntary Premium Calculation Rule flow</name>
+  <uuid>cf887801-5fbf-4b5c-8127-225d56526200</uuid>
+  <locale>en_US</locale>
+  <categories>any</categories>
+  <rfModel>
+<Ruleflow xmlns="http://schemas.ilog.com/Rules/7.0/Ruleflow">
+  <Body>
+    <TaskList>
+      <StartTask Identifier="task_1"/>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="rule_0" Ordering="Default">
+        <FinalActions Language="irl"><![CDATA[vmValue = BaseRateResult * UsageResult/100;
+
+UsageOutput=vmValue;
+
+UsageResult=UsageResult;]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="7b343e98-4b56-4e94-99bb-6b4e27952786"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_0" Ordering="Default">
+        <FinalActions Language="irl"><![CDATA[vmValue = Utils.roundValue(vmValue*CapacityResult/100,2);
+
+
+
+CapacityOutput=vmValue;
+
+CapacityResult=CapacityResult;
+
+]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="3915eed3-730a-411f-9c11-a76c187a4354"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_3" Ordering="Default">
+        <FinalActions Language="irl"><![CDATA[vmValue =Utils.roundValue( vmValue*DriverAgeResult/100,2);
+
+
+
+DriverAgeOutput=vmValue;
+
+
+
+]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="8b3af337-af6a-45ad-a3f3-fd94ba7fbe5b"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_4" Ordering="Default">
+        <FinalActions Language="irl"><![CDATA[vmValue = Utils.roundValue(vmValue*CarAgeResult/100,2);
+
+
+
+CarAgeOutput=Utils.roundValue(vmValue,2);
+
+CarAgeResult=CarAgeResult;]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="7f0416ac-e277-479d-824f-711bf4ab0892"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_5" Ordering="Default">
+        <FinalActions Language="irl"><![CDATA[ vmValue =Utils.roundValue( vmValue* SumInsuredResult/100,2);
+
+ 
+
+ SumInsuredOutput=Utils.roundValue(vmValue,2);
+
+ SumInsuredResult=SumInsuredResult;
+
+]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="dac0193b-711f-4aed-bad5-de2209fc3549"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_6" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="e43987e5-b69b-4bee-b85e-e2cf8d0b16ee"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_8" Ordering="Default">
+        <FinalActions Language="irl"><![CDATA[vmValue = Utils.roundValue( vmValue*CarGroupResult/100,2);
+
+
+CarGroupOutput=vmValue;
+CarGroupResult=CarGroupResult;]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="85f60124-828b-4351-bafa-5d64049dd9ca"/>
+          <Rule Uuid="5e294868-e159-4e81-bb4d-66b292001170"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_10" Ordering="Default">
+        <FinalActions Language="irl"><![CDATA[vmValue= Utils.roundValue(vmValue*(BIAccidentResult),2);
+
+TPBiAccidentOutput=Utils.roundValue(vmValue,2);
+BIAccidentResult=BIAccidentResult;
+
+vmValue= Utils.roundValue(vmValue*(TPPropertyResult),2);
+
+TPPropAccidentOutput=vmValue;
+TPPropertyResult=TPPropertyResult;
+
+
+]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="a85eac60-e498-49f6-bec0-4367c62d11eb"/>
+          <Rule Uuid="09c20b8e-7931-4614-8e70-5d2555cf8c89"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_9" Ordering="Default">
+        <FinalActions Language="irl"><![CDATA[vmValue= Utils.roundValue(vmValue*TPBIPersonResult,2);
+
+TPBiPersonOutput=vmValue;
+TPBIPersonResult=TPBIPersonResult;]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="292e4f5a-adeb-41e6-b714-faa724d17c33"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_13" Ordering="Default">
+        <InitialActions Language="bal"><![CDATA[set the fleet percent of the discount of TariffInput to 10;]]></InitialActions>
+        <FinalActions Language="irl"><![CDATA[vmValue=Utils.roundValue(vmValue-(vmValue*FleetPercentResult/100),2);
+
+
+FleetDiscountOutput=vmValue;
+FleetPercentResult=FleetPercentResult;]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="9b2e35b6-57c3-40e2-8478-35087dacb15a"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_15" Ordering="Default">
+        <InitialActions Language="bal"><![CDATA[set the direct percent of the discount of TariffInput to -1;
+
+set the red plate percent of the discount of TariffInput to 5;
+
+set the cctv percent of the discount of TariffInput to 5;]]></InitialActions>
+        <FinalActions Language="irl"><![CDATA[
+
+vmValue=Utils.roundValue(vmValue-(vmValue*DirectDiscountResult/100),2);
+DirectDiscountOutput=vmValue;
+DirectDiscountResult=DirectDiscountResult;
+
+vmValue=Utils.roundValue(vmValue-(vmValue*RedPlateDiscountResult/100),2);
+RedPlateDiscountOutput=vmValue;
+RedPlateDiscountResult=RedPlateDiscountResult;
+
+vmValue=Utils.roundValue(vmValue-(vmValue*CCTVDiscountRangeResult/100),2);
+CctvDiscountOutput=vmValue;
+tTotalPremiumBeforTaxResult=vmValue;
+ReverseAnnualPremiumOutput = CctvDiscountOutput;
+
+
+]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="0ae33a5f-0701-4827-94ab-82179f506419"/>
+          <Rule Uuid="20b7a0e3-8211-46ae-a4da-b92b65f0de93"/>
+          <Rule Uuid="22def099-e687-46a9-add8-0ec89dc21965"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_14" Ordering="Default">
+        <InitialActions Language="bal"><![CDATA[set the ncb percent of the discount of TariffInput to 35;]]></InitialActions>
+        <FinalActions Language="irl"><![CDATA[
+
+vmValue=Utils.roundValue(vmValue-(vmValue*NCBDiscountResult/100),2);
+
+NcbDiscountOutput=vmValue;
+NCBDiscountResult=NCBDiscountResult;
+
+
+
+]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="7d36d65c-c752-4393-8520-1a84ff569f18"/>
+        </RuleList>
+      </RuleTask>
+      <ActionTask Identifier="task_16">
+        <Actions Language="irl"><![CDATA[StampDutyOutput= vmValue*0.4/100;
+
+tStampDutyOutput=StampDutyOutput;
+
+
+
+VatAmountOutput =(vmValue+StampDutyOutput)*7/100;
+
+tVatAmountOutput=VatAmountOutput;
+Vat=7;
+
+
+
+TotalPremiumOutput=Utils.roundValue(vmValue+VatAmountOutput+StampDutyOutput,2);
+
+tTotalPremiumOutput=TotalPremiumOutput;
+
+
+
+
+
+
+
+
+]]></Actions>
+      </ActionTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_7" Ordering="Default">
+        <FinalActions Language="irl"><![CDATA[driverCoverage = DriverCoverResult*DriverPassengerSiResult/1000; 
+passengerCoverage= PassengerCoverResult*6 * DriverPassengerSiResult/1000;
+
+Ror_Yor1 = driverCoverage+passengerCoverage;
+
+PaPassengerAmountOutput=Ror_Yor1;
+
+PassengerCoverResult=DriverCoverResult;]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="843f7baf-ed5a-478b-b527-cc308feb6459"/>
+          <Rule Uuid="f85f7edd-d177-4cf6-86c5-b75f6bd13d8f"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_11" Ordering="Default">
+        <FinalActions Language="irl"><![CDATA[medicalExpense=MedicalExpenseResult*7;
+
+Ror_Yor2=medicalExpense;
+
+PaMedicalExpenseOutput=Ror_Yor2;
+
+
+]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="0614e6ac-df18-49a3-89ce-78773df44354"/>
+        </RuleList>
+      </RuleTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_17" Ordering="Default">
+        <FinalActions Language="irl"><![CDATA[Ror_Yor3 = BailBondSiResult *(BailBondResult/100);
+
+PaBailBondOutput=Ror_Yor3;
+]]></FinalActions>
+        <RuleList>
+          <Rule Uuid="5068d18c-c94e-4b91-ae77-d07e41f3764f"/>
+        </RuleList>
+      </RuleTask>
+      <ActionTask Identifier="task_18">
+        <Actions Language="irl"><![CDATA[vmValue = Utils.roundValue(vmValue+Ror_Yor1+Ror_Yor2+Ror_Yor3,2);
+rorscalc = vmValue;
+vmValue=vmValue-Deductible;
+AfterDeductibleOutput=vmValue;
+//afterdeductionoutput=vmValue;
+
+
+
+
+
+
+]]></Actions>
+      </ActionTask>
+      <StopTask Identifier="task_2"/>
+    </TaskList>
+    <NodeList>
+      <TaskNode Identifier="node_0" Task="task_1"/>
+      <TaskNode Identifier="node_1" Task="task_2"/>
+      <TaskNode Identifier="node_2" Task="rule_0"/>
+      <TaskNode Identifier="node_3" Task="task_0"/>
+      <TaskNode Identifier="node_4" Task="task_3"/>
+      <TaskNode Identifier="node_5" Task="task_4"/>
+      <TaskNode Identifier="node_6" Task="task_5"/>
+      <TaskNode Identifier="node_7" Task="task_6"/>
+      <TaskNode Identifier="node_9" Task="task_8"/>
+      <TaskNode Identifier="node_11" Task="task_10"/>
+      <TaskNode Identifier="node_10" Task="task_9"/>
+      <TaskNode Identifier="node_14" Task="task_13"/>
+      <TaskNode Identifier="node_16" Task="task_15"/>
+      <TaskNode Identifier="node_15" Task="task_14"/>
+      <TaskNode Identifier="node_17" Task="task_16"/>
+      <TaskNode Identifier="node_8" Task="task_7"/>
+      <TaskNode Identifier="node_12" Task="task_11"/>
+      <TaskNode Identifier="node_18" Task="task_17"/>
+      <TaskNode Identifier="node_19" Task="task_18"/>
+    </NodeList>
+    <TransitionList>
+      <Transition Identifier="transition_0" Source="node_0" Target="node_2"/>
+      <Transition Identifier="transition_2" Source="node_2" Target="node_3"/>
+      <Transition Identifier="transition_1" Source="node_3" Target="node_4"/>
+      <Transition Identifier="transition_3" Source="node_4" Target="node_5"/>
+      <Transition Identifier="transition_4" Source="node_6" Target="node_7"/>
+      <Transition Identifier="transition_5" Source="node_7" Target="node_9"/>
+      <Transition Identifier="transition_9" Source="node_5" Target="node_6"/>
+      <Transition Identifier="transition_11" Source="node_11" Target="node_8"/>
+      <Transition Identifier="transition_10" Source="node_10" Target="node_11"/>
+      <Transition Identifier="transition_8" Source="node_9" Target="node_10"/>
+      <Transition Identifier="transition_16" Source="node_16" Target="node_17"/>
+      <Transition Identifier="transition_15" Source="node_15" Target="node_16"/>
+      <Transition Identifier="transition_14" Source="node_14" Target="node_15"/>
+      <Transition Identifier="transition_17" Source="node_17" Target="node_1"/>
+      <Transition Identifier="transition_7" Source="node_12" Target="node_18"/>
+      <Transition Identifier="transition_19" Source="node_8" Target="node_12"/>
+      <Transition Identifier="transition_18" Source="node_19" Target="node_14"/>
+      <Transition Identifier="transition_12" Source="node_18" Target="node_19"/>
+    </TransitionList>
+  </Body>
+  <Resources>
+    <ResourceSet Locale="en_US">
+      <Data Name="node_14#name">node_14</Data>
+      <Data Name="node_9#x">51.000008</Data>
+      <Data Name="node_9#y">813.67285</Data>
+      <Data Name="node_15#width">102.0</Data>
+      <Data Name="node_10#label">BI</Data>
+      <Data Name="node_18#height">53.402344</Data>
+      <Data Name="node_6#label">Sum Insured Calc</Data>
+      <Data Name="node_10#height">40.0</Data>
+      <Data Name="node_17#height">68.103516</Data>
+      <Data Name="node_19#height">40.0</Data>
+      <Data Name="node_11#height">53.402344</Data>
+      <Data Name="node_14#height">53.402344</Data>
+      <Data Name="node_16#height">40.0</Data>
+      <Data Name="node_15#height">53.402344</Data>
+      <Data Name="node_12#height">53.402344</Data>
+      <Data Name="node_12#width">102.0</Data>
+      <Data Name="node_12#y">1235.9316</Data>
+      <Data Name="node_3#label">Capacity Rule Task</Data>
+      <Data Name="node_16#x">51.000008</Data>
+      <Data Name="node_0#width">21.0</Data>
+      <Data Name="node_12#x">51.000008</Data>
+      <Data Name="node_5#x">50.999985</Data>
+      <Data Name="node_5#y">474.06348</Data>
+      <Data Name="node_16#y">1732.8398</Data>
+      <Data Name="node_1#x">51.0</Data>
+      <Data Name="node_8#name">node_8</Data>
+      <Data Name="node_1#y">1931.9434</Data>
+      <Data Name="node_3#width">102.0</Data>
+      <Data Name="node_15#name">node_15</Data>
+      <Data Name="node_7#name">node_7</Data>
+      <Data Name="node_12#name">node_12</Data>
+      <Data Name="node_9#label">Car Group Table</Data>
+      <Data Name="node_16#label">Discount</Data>
+      <Data Name="node_6#width">102.0</Data>
+      <Data Name="node_10#width">102.0</Data>
+      <Data Name="node_17#name">node_17</Data>
+      <Data Name="node_5#name">node_5</Data>
+      <Data Name="node_19#label">Ror Yor</Data>
+      <Data Name="node_15#x">51.000008</Data>
+      <Data Name="node_15#y">1636.1387</Data>
+      <Data Name="node_18#name">node_18</Data>
+      <Data Name="node_11#x">50.999985</Data>
+      <Data Name="node_11#y">1014.4258</Data>
+      <Data Name="node_8#label">Driver &amp; Passenger Coverage</Data>
+      <Data Name="node_6#x">51.000008</Data>
+      <Data Name="node_5#width">102.0</Data>
+      <Data Name="node_6#y">592.167</Data>
+      <Data Name="node_11#name">node_11</Data>
+      <Data Name="node_12#label">Medical Expense</Data>
+      <Data Name="node_2#x">51.000008</Data>
+      <Data Name="node_14#width">102.0</Data>
+      <Data Name="node_19#x">51.000008</Data>
+      <Data Name="node_2#y">105.05176</Data>
+      <Data Name="node_19#y">1436.0352</Data>
+      <Data Name="node_11#label">BI per Accident </Data>
+      <Data Name="node_18#label">Bail Bond</Data>
+      <Data Name="node_7#label">Car Group</Data>
+      <Data Name="node_2#height">68.103516</Data>
+      <Data Name="node_4#width">102.0</Data>
+      <Data Name="node_1#height">22.0</Data>
+      <Data Name="node_3#height">68.103516</Data>
+      <Data Name="node_0#height">21.0</Data>
+      <Data Name="node_4#height">82.80469</Data>
+      <Data Name="node_7#y">702.9199</Data>
+      <Data Name="node_17#label">Total Premium Calc</Data>
+      <Data Name="node_2#name">node_2</Data>
+      <Data Name="node_5#height">68.103516</Data>
+      <Data Name="node_6#height">68.103516</Data>
+      <Data Name="node_7#height">53.402344</Data>
+      <Data Name="node_14#label">Fleet Discount</Data>
+      <Data Name="node_7#width">102.0</Data>
+      <Data Name="node_14#x">51.000015</Data>
+      <Data Name="node_14#y">1532.7363</Data>
+      <Data Name="node_9#height">68.103516</Data>
+      <Data Name="node_8#height">68.103516</Data>
+      <Data Name="node_19#width">102.0</Data>
+      <Data Name="node_10#x">51.000008</Data>
+      <Data Name="node_10#y">917.7246</Data>
+      <Data Name="node_3#y">223.15527</Data>
+      <Data Name="node_7#x">51.000008</Data>
+      <Data Name="node_18#x">51.000008</Data>
+      <Data Name="node_18#y">1339.334</Data>
+      <Data Name="node_3#x">50.999985</Data>
+      <Data Name="node_1#name">node_1</Data>
+      <Data Name="node_2#label">Car Usage Rule</Data>
+      <Data Name="node_5#label">Car Age Rule Task</Data>
+      <Data Name="node_4#name">node_4</Data>
+      <Data Name="node_16#width">102.0</Data>
+      <Data Name="node_8#x">51.000008</Data>
+      <Data Name="node_8#y">1125.1787</Data>
+      <Data Name="node_9#width">102.0</Data>
+      <Data Name="node_2#width">102.0</Data>
+      <Data Name="node_17#width">102.0</Data>
+      <Data Name="node_15#label">NCB Discount</Data>
+      <Data Name="node_4#x">50.999992</Data>
+      <Data Name="node_4#y">348.60938</Data>
+      <Data Name="node_0#x">51.0</Data>
+      <Data Name="node_17#x">51.000015</Data>
+      <Data Name="node_0#y">10.5</Data>
+      <Data Name="node_17#y">1836.8916</Data>
+      <Data Name="node_11#width">102.0</Data>
+      <Data Name="node_10#name">node_10</Data>
+      <Data Name="node_8#width">102.0</Data>
+      <Data Name="node_1#width">22.0</Data>
+      <Data Name="node_6#name">node_6</Data>
+      <Data Name="node_9#name">node_9</Data>
+      <Data Name="node_18#width">102.0</Data>
+      <Data Name="node_0#name">node_0</Data>
+      <Data Name="node_4#label">Driver Age Rule Task</Data>
+      <Data Name="node_16#name">node_16</Data>
+      <Data Name="node_19#name">node_19</Data>
+      <Data Name="node_3#name">node_3</Data>
+    </ResourceSet>
+  </Resources>
+  <Properties>
+    <imports><![CDATA[use vmValue;
+use carAgeRate;
+use DriverAgeRate;
+use CapacityRate;
+use BaseRateResult;
+use carUsageRate;
+use SumInsuredResult;
+use MakeModelResult;
+import main.tariffcalculation.Utils;
+use vmValueTemp;
+use CarGroupResult;
+use BIAccidentResult;
+use TPBIPersonResult;
+use AfterBailBondOutput;
+use TPPropertyResult;
+use Ror_Yor1;
+use Ror_Yor2;
+use Ror_Yor3;
+use FleetPercentResult;
+use TotalPremiumOutput;
+use NCBDiscountResult;
+use DirectDiscountResult;
+use RedPlateDiscountResult;
+use CCTVDiscountRangeResult;
+use StampDutyOutput;
+use VatAmountOutput;
+use tStampDutyOutput;
+use tVatAmountOutput;
+use tTotalPremiumOutput;
+use DriverCoverResult;
+use driverCoverage;
+use passengerCoverage;
+use PassengerCoverResult;
+use MedicalExpenseResult;
+use medicalExpense;
+use BailBondResult;
+use UsageOutput;
+use UsageResult;
+use CapacityOutput;
+use CapacityResult;
+use DriverAgeOutput;
+use DriverAgeResult;
+use CarAgeOutput;
+use CarAgeResult;
+use SumInsuredOutput;
+use CarGroupOutput;
+use TPBiPersonOutput;
+use TPBiAccidentOutput;
+use TPPropAccidentOutput;
+use PaPassengerAmountOutput;
+use PaMedicalExpenseOutput;
+use MedicalExpensePAResult;
+use PaBailBondOutput;
+use BailBondSiResult;
+use AfterDeductibleOutput;
+use DeductibleResult;
+use FleetDiscountOutput;
+use NcbDiscountOutput;
+use DirectDiscountOutput;
+use RedPlateDiscountOutput;
+use CctvDiscountOutput;
+use rorscalc;
+use afterdeductionoutput;
+import main.tariffcalculation.UtilDate;
+use Vat;
+use BiAccidentSiResult;
+use BiPersonSiResult;
+use DriverPassengerSiResult;
+use PropAccidentSiResult;
+import java.math.BigDecimal;
+use tTotalPremiumBeforTaxResult;
+use Deductible;
+]]></imports>
+  </Properties>
+</Ruleflow>
+</rfModel>
+</ilog.rules.studio.model.ruleflow:RuleFlow>
